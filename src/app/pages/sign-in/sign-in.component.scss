@@ -1,0 +1,55 @@
+
+@import '../homepage/homepage.component';
+
+$card-width: 400px;
+$card-margin: auto;
+
+.content {
+  padding: 5px;
+}
+.card {
+    max-width: $card-width;
+    margin: $card-margin;
+
+    mat-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 28px;
+      margin: 15px 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+
+      input.right-align::-webkit-outer-spin-button,
+      input.right-align::-webkit-inner-spin-button {
+        display: none;
+      }
+    
+      input.right-align {
+        -moz-appearance: textfield;
+      }
+    }
+    
+    .container > * {
+      width: 100%;
+    }
+    
+    .right-align {
+      text-align: center;
+    }
+  
+    .text-right {
+        text-align: right;
+    }
+  }
+
+  
+  

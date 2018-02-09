@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+  }
+  
+  app-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+  }
+  
+  .container > app-sidenav {
+    flex: 1;
+  }
+  
+  .container > app-homepage,
+  .container > app-guides,
+  .container > guide-viewer {
+    overflow-y: auto;
+  }
+  
+  @media (max-width: 720px) {
+    .container {
+      top: 92px;
+    }
+  
+    .container > app-homepage,
+    .container > app-guides,
+    .container > guide-viewer {
+      overflow-y: visible;
+    }
+  }
+  
