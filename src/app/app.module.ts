@@ -22,6 +22,7 @@ import { SidenavComponent } from './pages/sidenav/sidenav.component';
 import { PageHeaderComponent } from './pages/page-header/page-header.component';
 import { PageViewerComponent } from './pages/page-viewer/page-viewer.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { PoDailyComponent } from './components/po-daily/po-daily.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
     PageHeaderComponent,
     PageViewerComponent,
     SignInComponent,
+    PoDailyComponent,
   ],
   imports: [
     MaterialModule,
