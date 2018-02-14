@@ -23,6 +23,7 @@ import { PageHeaderComponent } from './pages/page-header/page-header.component';
 import { PageViewerComponent } from './pages/page-viewer/page-viewer.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { PoDailyComponent } from './components/po-daily/po-daily.component';
+import { MarketingReportComponent } from './components/marketing-report/marketing-report.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { PoDailyComponent } from './components/po-daily/po-daily.component';
     PageViewerComponent,
     SignInComponent,
     PoDailyComponent,
+    MarketingReportComponent,
   ],
   imports: [
     MaterialModule,
