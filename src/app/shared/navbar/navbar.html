@@ -1,8 +1,9 @@
 <!-- TODO: figure out if the <nav> should go inside of a <header> element. -->
 <nav class="docs-navbar-header">
-    <a mat-button class="docs-button" routerLink="/" aria-label="Ampelite">        
-        <span>Ampelite</span>
+    <a mat-button class="docs-button" routerLink="/" aria-label="Ampelite">
+        <span>Home</span>
     </a>
+    <a mat-button class="docs-navbar-hide-small docs-button" href="http://203.154.45.40/Ampelite.o/Login.aspx">Ampelite.O</a>
     <!-- <a mat-button class="docs-navbar-hide-small docs-button" *ngFor="let key of sectionKeys" [routerLink]="key">{{sections[key]}}</a>
     <a mat-button class="docs-navbar-hide-small docs-button" routerLink="guides">Guides</a> -->
     <div class="flex-spacer"></div>
@@ -13,7 +14,7 @@
     <button mat-icon-button *ngIf="getIsSignIn()" [matMenuTriggerFor]='menu'>
         <mat-icon>account_circle</mat-icon>
     </button>
-    
+
     <mat-menu #menu="matMenu">
         <button mat-menu-item>
             <mat-icon>account_circle</mat-icon>
@@ -34,6 +35,7 @@
 
 </nav>
 <nav class="docs-navbar docs-navbar-show-small">
-    <a mat-button class="docs-navbar-link" *ngFor="let key of sectionKeys" [routerLink]="key">{{sections[key]}}</a>
-    <a mat-button class="docs-navbar-link" routerLink="guides">Guides</a>
+    <!-- <a mat-button class="docs-navbar-link" *ngFor="let key of sectionKeys" [routerLink]="key">{{sections[key]}}</a>
+    <a mat-button class="docs-navbar-link" routerLink="guides">Guides</a> -->
+    <a mat-button class="docs-navbar-link" href="http://203.154.45.40/Ampelite.o/Login.aspx">Ampelite.O</a>
 </nav>
