@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { Subscription } from 'rxjs/Subscription';
 // import { map } from 'rxjs/operators/map';
-import { Chart } from 'chart.js'
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-po-daily',
@@ -52,7 +52,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         borderColor: 'rgb(236, 64, 122)'
       }],
       labels: ['January', 'February', 'March', 'April']
-    }
+    };
 
     const option = {
       scales: {
@@ -63,13 +63,13 @@ export class PoDailyComponent implements OnInit, OnDestroy {
           stacked: true
         }]
       }
-    }
+    };
 
-    let myChart = new Chart(this._myChart.nativeElement, {
+    const myChart = new Chart(this._myChart.nativeElement, {
       type: 'bar',
       data: data,
       options: option
-    })
+    });
   }
 
   ngOnDestroy() {

@@ -43,21 +43,6 @@ export class PageViewerComponent {
   }
 }
 
-@Component({
-  selector: 'component-overview',
-  templateUrl: './page-overview.component.html',
-  encapsulation: ViewEncapsulation.None,
-})
-export class ComponentOverview implements OnInit {
-  @ViewChild('intialFocusTarget') focusTarget: ElementRef;
-
-  constructor(public PageViewerComponent: PageViewerComponent) { }
-
-  ngOnInit() {
-    // 100ms timeout is used to allow the page to settle before moving focus for screen readers.
-    setTimeout(() => this.focusTarget.nativeElement.focus(), 100);
-  }
-}
 
 @NgModule({
   imports: [
@@ -67,8 +52,8 @@ export class ComponentOverview implements OnInit {
     CommonModule,
     // TableOfContentsModule,
   ],
-  exports: [PageViewerComponent, ComponentOverview],
-  declarations: [PageViewerComponent, ComponentOverview],
+  exports: [PageViewerComponent],
+  declarations: [PageViewerComponent],
   providers: [DocumentationItems, ComponentPageTitle],
 })
 export class ComponentViewerModule { }
