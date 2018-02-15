@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 export interface DocItem {
   id: string;
   name: string;
+  component: string;
   packageName?: string;
   examples?: string[];
 }
@@ -28,14 +29,14 @@ const DOCS: {[key: string]: DocCategory[]} = {
       id: 'account',
       name: 'Account',
       items: [
-        {id: 'marketing_report', name: 'Marketing report', examples: ['autocomplete-overview']},
+        {id: 'marketing-report', name: 'Marketing report', component: 'app-marketing-report', examples: []},
       ]
     },
     {
       id: 'sale_coordinator',
       name: 'Sale coordinator',
       items: [
-        {id: 'po_daily', name: 'PO. daily', examples: ['autocomplete-overview']},
+        {id: 'po-daily', name: 'PO. daily report', component: 'app-marketing-report', examples: []},
       ]
     },
     
@@ -116,28 +117,30 @@ const DOCS: {[key: string]: DocCategory[]} = {
     // }
   ],
   [CDK] : [
-    {
-      id: 'component-composition',
-      name: 'Common Behaviors',
-      items: [
-        {id: 'a11y', name: 'Accessibility', examples: []},
-        {id: 'bidi', name: 'Bidirectionality', examples: []},
-        {id: 'layout', name: 'Layout', examples: []},
-        {id: 'observers', name: 'Observers', examples: []},
-        {id: 'overlay', name: 'Overlay', examples: []},
-        {id: 'portal', name: 'Portal', examples: []},
-        {id: 'scrolling', name: 'Scrolling', examples: []},
-      ]
-    },
-    {
-      id: 'components',
-      name: 'Components',
-      items: [
-        {id: 'stepper', name: 'Stepper', examples: []},
-        {id: 'table', name: 'Table', examples: []},
+    // {
+    //   id: 'component-composition',
+    //   name: 'Common Behaviors',
+    //   items: [
+    //     {id: 'a11y', name: 'Accessibility', examples: []},
+    //     {id: 'bidi', name: 'Bidirectionality', examples: []},
+    //     {id: 'layout', name: 'Layout', examples: []},
+    //     {id: 'observers', name: 'Observers', examples: []},
+    //     {id: 'overlay', name: 'Overlay', examples: []},
+    //     {id: 'portal', name: 'Portal', examples: []},
+    //     {id: 'scrolling', name: 'Scrolling', examples: []},
+    //   ]
+    // },
+    // {
+    //   id: 'components',
+    //   name: 'Components',
+    //   items: [
+    //     {id: 'stepper', name: 'Stepper', examples: []},
+    //     {id: 'table', name: 'Table', examples: []},
 
-      ]
-    },
+    //   ]
+    // },
+
+
     // TODO(jelbourn): re-add utilities and a11y as top-level categories once we can generate
     // their API docs with dgeni. Currently our setup doesn't generate API docs for constants
     // and standalone functions (much of the utilities) and we have no way of generating API

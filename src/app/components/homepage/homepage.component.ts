@@ -3,7 +3,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material';
 // import {FooterModule} from '../../shared/footer/footer';
 import { RouterModule } from '@angular/router';
-import { ComponentPageTitle } from '../page-title/page-title';
+import { ComponentPageTitle } from '../../pages/page-title/page-title';
 import { SECTIONS } from '../../shared/documentation-items/documentation-items';
 
 const SECTIONS_KEYS = Object.keys(SECTIONS);

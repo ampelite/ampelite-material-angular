@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComponentPageTitle } from '../../pages/page-title/page-title';
 
 @Component({
   selector: 'app-marketing-report',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketingReportComponent implements OnInit {
 
-  constructor() { }
+  constructor(public _componentPageTitle: ComponentPageTitle) { }
 
   ngOnInit() {
+    this._componentPageTitle.title = "Marketing report"
   }
 
 }
