@@ -30,7 +30,7 @@ export class HomepageComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [MatButtonModule, RouterModule], // SvgViewerModule, FooterModule, 
+  imports: [MatButtonModule, RouterModule], // SvgViewerModule, FooterModule,
   exports: [HomepageComponent],
   declarations: [HomepageComponent],
 })

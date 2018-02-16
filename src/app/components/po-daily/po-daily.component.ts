@@ -32,12 +32,14 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       datasets: [{
         label: 'Ampelite D-lite',
         data: [10, 20, 30, 40],
-        // backgroundColor: 'rgba(66, 165, 245, 0.6)'
+        backgroundColor: 'rgba(66, 165, 245, 0.6)',
+        borderColor: 'rgb(66, 165, 245)'
       }, {
         label: 'Ampelite Amperam',
         data: [10, 20, 30, 40],
         type: 'bar',
-        // backgroundColor: "rgba(102, 187, 106, 0.6)"
+        backgroundColor: 'rgba(102, 187, 106, 0.6)',
+        borderColor: 'rgb(102, 187, 106)'
       }, {
         label: 'Avg',
         data: [14, 53, 40, 20],
