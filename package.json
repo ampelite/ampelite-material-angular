@@ -17,8 +17,13 @@
     "@angular/common": "^5.2.5",
     "@angular/compiler": "^5.2.0",
     "@angular/core": "^5.2.5",
+<<<<<<< HEAD
     "@angular/forms": "^5.2.5",
     "@angular/http": "^5.2.5",
+=======
+    "@angular/forms": "^5.2.0",
+    "@angular/http": "^5.2.0",
+>>>>>>> 0012712f929d7e0e16df210d9109d9cb560e54b3
     "@angular/material": "^5.2.1",
     "@angular/platform-browser": "^5.2.5",
     "@angular/platform-browser-dynamic": "^5.2.5",
