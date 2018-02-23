@@ -17,13 +17,8 @@
     "@angular/common": "^5.2.5",
     "@angular/compiler": "^5.2.0",
     "@angular/core": "^5.2.5",
-<<<<<<< HEAD
     "@angular/forms": "^5.2.5",
     "@angular/http": "^5.2.5",
-=======
-    "@angular/forms": "^5.2.0",
-    "@angular/http": "^5.2.0",
->>>>>>> 0012712f929d7e0e16df210d9109d9cb560e54b3
     "@angular/material": "^5.2.1",
     "@angular/platform-browser": "^5.2.5",
     "@angular/platform-browser-dynamic": "^5.2.5",
@@ -31,11 +26,12 @@
     "ajv-keywords": "^3.1.0",
     "chart.js": "^2.7.1",
     "core-js": "^2.4.1",
+    "highcharts": "^6.0.7",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
-    "@angular/cli": "^1.6.8",
+    "@angular/cli": "^1.7.0",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
     "@types/jasmine": "~2.8.3",

@@ -39,27 +39,46 @@ export class PoDailyComponent implements OnInit, OnDestroy {
           label: 'Avg',
           data: [20, 20, 20, 20],
           type: 'line',
-          backgroundColor: 'rgba(255, 202, 40, 0.4)',
-          borderColor: 'rgb(255, 202, 40)'
-        }, {
-          label: 'Ampelite D-lite',
-          data: [10, 20, 30, 40],
-          backgroundColor: 'rgba(75, 192, 192, 0.7)',
-          borderColor: 'rgb(75, 192, 192)'
-        }, {
-          label: 'Ampelite Amperam',
-          data: [10, 28, 10, 10],
-          type: 'bar',
-          backgroundColor: 'rgba(255, 99, 132, 0.7)',
-          borderColor: 'rgb(255, 99, 132)'
+          borderColor: 'rgb(255, 202, 40)',
+          borderWidth: 1,
+          // pointStyle: 'rectRot',
+          // pointRadius: 4,
+          // hitRadius: 10,
+          backgroundColor: 'rgba(255, 202, 40, 0.2)',
+          pointBackgroundColor: 'rgb(255, 202, 40)',
+          // pointHoverRadius: 10
         }, {
           yAxisID: 'accu',
           label: 'ACCU',
           data: [30, 20, 30, 3],
           type: 'line',
-          backgroundColor: 'rgba(54, 162, 235, 0.4)',
-          borderColor: 'rgb(54, 162, 235)'
-        }],
+          borderColor: 'rgb(54, 162, 235)',
+          borderWidth: 1,
+          // pointStyle: 'rectRot',
+          // pointRadius: 4,
+          // hitRadius: 10,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          pointBackgroundColor: 'rgb(54, 162, 235)',
+          // pointHoverRadius: 10
+        }, {
+          label: 'Ampelite D-lite',
+          data: [10, 20, 30, 40],
+          type: 'bar',
+          fillColor: "#79D1CF",
+          strokeColor: "#79D1CF",
+          backgroundColor: 'rgba(75, 192, 192, 0.7)',
+          borderColor: 'rgb(75, 192, 192)',
+          stack: 'stack'
+        }, {
+          label: 'Ampelite Amperam',
+          data: [10, 28, 10, 10],
+          type: 'bar',
+          fillColor: "#79D1CF",
+          strokeColor: "#79D1CF",
+          backgroundColor: 'rgba(255, 99, 132, 0.7)',
+          borderColor: 'rgb(255, 99, 132)',
+          stack: 'stack'
+        },],
       labels: label
     };
 
@@ -69,18 +88,22 @@ export class PoDailyComponent implements OnInit, OnDestroy {
           {
             stacked: true,
             gridLines: {
-              display: false
-            }
+              drawOnChartArea: false,
+            },
           }
         ],
         yAxes: [
           {
-            stacked: true
+            stacked: true,
+            gridLines: {
+              drawOnChartArea: false,
+            }
           }, {
             id: 'accu',
             position: 'right',
+
             gridLines: {
-              display: false
+              drawOnChartArea: false,
             }
           }
         ]
@@ -90,33 +113,42 @@ export class PoDailyComponent implements OnInit, OnDestroy {
           const chartInstance = this.chart,
             ctx = chartInstance.ctx;
 
-          // ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
           ctx.textAlign = 'center';
           ctx.textBaseline = 'bottom';
+          ctx.fillStyle='rgba(0, 0, 0, 0.87)';
 
           this.data.datasets.forEach(function (dataset, i) {
-            const meta = chartInstance.controller.getDatasetMeta(i);
-            meta.data.forEach(function (bar, index) {
-              const data = dataset.data[index];
-              ctx.fillText(data, bar._model.x, bar._model.y - 5);
-            });
+            if (dataset.type == 'bar') {
+              const meta = chartInstance.controller.getDatasetMeta(i);
+              meta.data.forEach(function (bar, index) {
+                const data = dataset.data[index];
+                ctx.fillText(data, bar._model.x, bar._model.y - 5);
+              });
+            }
           });
         }
       },
       legend: {
-        position: 'bottom'
+        display: true,
+        position: 'bottom',
       },
       title: {
-        display: true,
-        text: 'Custom Chart Title'
+        // display: true,
+        // text: 'Custom Chart Title'
+      }, tooltips: {
+        mode: 'x',
+        intersect: true
       }
     };
+
+    Chart.defaults.global.legend.labels.usePointStyle = true;
 
     const myChart = new Chart(this._myChart.nativeElement, {
       type: 'bar',
       data: dataset,
       options: option,
     });
+
   }
 
   ngOnDestroy() {
