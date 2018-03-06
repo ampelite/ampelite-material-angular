@@ -24,7 +24,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     public _componentPageTitle: ComponentPageTitle,
     private _route: ActivatedRoute) { }
 
-  @ViewChild('myChart') _myChart: ElementRef;
+  @ViewChild('barchart') barchart: ElementRef;
   ngOnInit() {
     this._componentPageTitle.title = 'Po. daily report';
 
@@ -35,38 +35,36 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
     const dataset = {
       datasets: [
+        // {
+        //   label: 'Avg',
+        //   data: [20, 20, 20, 20],
+        //   type: 'line',
+        //   borderColor: 'rgb(255, 202, 40)',
+        //   borderWidth: 1,
+        //   pointRadius: 4,
+        //   hitRadius: 10,
+        //   backgroundColor: 'rgba(255, 202, 40, 0.2)',
+        //   pointBackgroundColor: 'rgb(255, 202, 40)',
+        // }, {
+        //   yAxisID: 'accu',
+        //   label: 'ACCU',
+        //   data: [30, 20, 30, 3],
+        //   type: 'line',
+        //   borderColor: 'rgb(54, 162, 235)',
+        //   borderWidth: 1,
+        //   pointRadius: 4,
+        //   hitRadius: 10,
+        //   backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        //   pointBackgroundColor: '#fff',
+        //   // pointHoverRadius: 10
+        // }, 
         {
-          label: 'Avg',
-          data: [20, 20, 20, 20],
-          type: 'line',
-          borderColor: 'rgb(255, 202, 40)',
-          borderWidth: 1,
-          // pointStyle: 'rectRot',
-          // pointRadius: 4,
-          // hitRadius: 10,
-          backgroundColor: 'rgba(255, 202, 40, 0.2)',
-          pointBackgroundColor: 'rgb(255, 202, 40)',
-          // pointHoverRadius: 10
-        }, {
-          yAxisID: 'accu',
-          label: 'ACCU',
-          data: [30, 20, 30, 3],
-          type: 'line',
-          borderColor: 'rgb(54, 162, 235)',
-          borderWidth: 1,
-          // pointStyle: 'rectRot',
-          // pointRadius: 4,
-          // hitRadius: 10,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          pointBackgroundColor: 'rgb(54, 162, 235)',
-          // pointHoverRadius: 10
-        }, {
           label: 'Ampelite D-lite',
           data: [10, 20, 30, 40],
           type: 'bar',
           fillColor: "#79D1CF",
           strokeColor: "#79D1CF",
-          backgroundColor: 'rgba(75, 192, 192, 0.7)',
+          backgroundColor: 'rgba(75, 192, 192, 0.9)',
           borderColor: 'rgb(75, 192, 192)',
           stack: 'stack'
         }, {
@@ -75,10 +73,11 @@ export class PoDailyComponent implements OnInit, OnDestroy {
           type: 'bar',
           fillColor: "#79D1CF",
           strokeColor: "#79D1CF",
-          backgroundColor: 'rgba(255, 99, 132, 0.7)',
+          backgroundColor: 'rgba(255, 99, 132, 0.9)',
           borderColor: 'rgb(255, 99, 132)',
           stack: 'stack'
-        },],
+        },
+      ],
       labels: label
     };
 
@@ -117,15 +116,15 @@ export class PoDailyComponent implements OnInit, OnDestroy {
           ctx.textBaseline = 'bottom';
           ctx.fillStyle='rgba(0, 0, 0, 0.87)';
 
-          this.data.datasets.forEach(function (dataset, i) {
-            if (dataset.type == 'bar') {
-              const meta = chartInstance.controller.getDatasetMeta(i);
-              meta.data.forEach(function (bar, index) {
-                const data = dataset.data[index];
-                ctx.fillText(data, bar._model.x, bar._model.y - 5);
-              });
-            }
-          });
+          // this.data.datasets.forEach(function (dataset, i) {
+          //   if (dataset.type == 'bar') {
+          //     const meta = chartInstance.controller.getDatasetMeta(i);
+          //     meta.data.forEach(function (bar, index) {
+          //       const data = dataset.data[index];
+          //       ctx.fillText(data, bar._model.x, bar._model.y - 5);
+          //     });
+          //   }
+          // });
         }
       },
       legend: {
@@ -143,7 +142,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
     Chart.defaults.global.legend.labels.usePointStyle = true;
 
-    const myChart = new Chart(this._myChart.nativeElement, {
+    const myChart = new Chart(this.barchart.nativeElement, {
       type: 'bar',
       data: dataset,
       options: option,
