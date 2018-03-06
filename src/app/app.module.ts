@@ -12,7 +12,7 @@ import { CategoryListComponent } from './pages/category-list/category-list.compo
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ComponentPageTitle } from './pages/page-title/page-title';
 import { AuthGuard } from './guards/index';
-import { AuthenticationService, UserService } from './services/index';
+import { AuthenticationService, UserService, DailypoService } from './services/index';
 
 import { MaterialModule } from './modules/material/material.module';
 
@@ -53,6 +53,7 @@ import { MarketingReportComponent } from './components/marketing-report/marketin
     AuthGuard,
     AuthenticationService,
     UserService,
+    DailypoService,
     ComponentPageTitle,
     DocumentationItems,
   ],

@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs/Subscription';
 // import { map } from 'rxjs/operators/map';
 import { Chart } from 'chart.js';
 
+import { DailypoService } from '../../services'
+
 @Component({
   selector: 'app-po-daily',
   templateUrl: './po-daily.component.html',
@@ -22,11 +24,14 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
   constructor(public docItems: DocumentationItems,
     public _componentPageTitle: ComponentPageTitle,
-    private _route: ActivatedRoute) { }
+    private _route: ActivatedRoute,
+    private DailypoService: DailypoService) { }
 
   @ViewChild('barchart') barchart: ElementRef;
   ngOnInit() {
     this._componentPageTitle.title = 'Po. daily report';
+    
+   console.log(this.DailypoService.getAll());
 
     const label = [];
     for (let i = 1; i < 31; i++) {
@@ -114,7 +119,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
           ctx.textAlign = 'center';
           ctx.textBaseline = 'bottom';
-          ctx.fillStyle='rgba(0, 0, 0, 0.87)';
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.87)';
 
           // this.data.datasets.forEach(function (dataset, i) {
           //   if (dataset.type == 'bar') {
