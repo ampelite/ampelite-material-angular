@@ -10,7 +10,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   signin(username: string, password: string) {
-    let res = this.http.post<any>(appConfig.apiUrl + '/Api/Auth/SignIn', { "userName": username, "password": password });
+    let res = this.http.post<any>(appConfig.apiVScode + '/Api/Auth/SignIn', { "userName": username, "password": password });
 
     return res.map(user => {
       if (user && user.access_token) {
