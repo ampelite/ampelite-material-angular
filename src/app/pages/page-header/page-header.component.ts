@@ -9,9 +9,12 @@ import { MatButtonModule, MatIconModule } from '@angular/material';
   styleUrls: ['./page-header.component.scss']
 })
 export class PageHeaderComponent {
-  constructor(public _componentPageTitle: ComponentPageTitle) { }
+  constructor(
+    public _componentPageTitle: ComponentPageTitle
+  ) { }
 
   @Output() toggleSidenav = new EventEmitter<void>();
+  @Output() openDialog = new EventEmitter<void>();
 
   getTitle() {
     return this._componentPageTitle.title;

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators/map';
+import { Observer } from 'rxjs/Observer';
 
 import { appConfig } from '../../app.config';
+// import { GraphProduct } from '../../models';
 
 @Injectable()
 export class DailypoService {
@@ -9,14 +12,8 @@ export class DailypoService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    let url = `${appConfig.apiLocal}/api/GraphProduct`;
+    let apiURL = `${appConfig.apiVScode}/api/GraphProduct`;
     let params = { Date: '2018-02-28T00:00:00', GroupCode: 'fibre', Unit: '1m' };
-
-    this.http.get<any>(url, { params, observe: 'response' })
-      .toPromise()
-      .then(response => {
-        console.log(JSON.stringify(response));
-      })
-      .catch(console.log);
+    return this.http.get<any>(apiURL, { params, observe: 'response' })
   }
 }
