@@ -62,8 +62,6 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     const avg = array.filter(res => { return res.type == "avg" });
     const accu = array.filter(res => { return res.type == "accu" });
 
-    const dataSet = [];
-
     const ctx = this.barchart.nativeElement.getContext("2d");
 
     // var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
@@ -74,6 +72,8 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     const gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
     gradientFill.addColorStop(0, "rgba(255, 202, 40, 0.6)");
     gradientFill.addColorStop(1, "rgba(255, 202, 250, 0)");
+
+    const dataSet = [];
 
     avg.map(e => {
       dataSet.push({
@@ -222,15 +222,11 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       }
     };
 
-
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: dataset,
       options: option,
     });
-
-    myChart.getContext('2d');
-
   }
 
   openDialog(): void {
