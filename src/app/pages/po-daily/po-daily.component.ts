@@ -22,6 +22,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
   params: Observable<Params>;
   routeParamSubscription: Subscription;
+  loading = false;
   // componentDocItem: DocItem;
 
   animal: string;
@@ -39,10 +40,14 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._componentPageTitle.title = 'Po. daily report';
 
-    this._dailypoService.getAll()
+    this._dailypoService.getGraphProduct()
       .subscribe(res => {
         this.drawChart(res.body);
-        return res.body;
+
+        setTimeout(() => {
+          this.loading = true;
+        }, 800)
+
       }, error => console.error(error));
   }
 
@@ -102,7 +107,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         label: e.name,
         data: e.unit,
         type: 'line',
-        borderWidth: 1.5,       
+        borderWidth: 1.5,
         borderColor: "rgb(255, 202, 40)",
         pointBorderColor: "rgba(255, 202, 40, 0.6)",
         pointBackgroundColor: "rgba(255, 255, 255, 0.6)",
@@ -159,7 +164,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
             stacked: true,
 
             gridLines: {
-              drawTicks:true,
+              drawTicks: true,
               zeroLineColor: white
               // drawOnChartArea: false,              
               // color: white,
@@ -177,7 +182,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
               drawOnChartArea: false,
             },
             ticks: {
-              fontColor: white,              
+              fontColor: white,
               padding: 5
             }
           }
@@ -231,7 +236,8 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
   openDialog(): void {
     let dialogRef = this._dialog.open(PoDailyOverviewDialog, {
-      width: '300px',
+      minWidth: '250px',
+      maxWidth: '300px',
       data: { name: this.name, animal: this.animal }
     });
 
