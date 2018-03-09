@@ -6,8 +6,8 @@
 @import './app/pages/sidenav/component-sidenav-theme';
 @import './app/pages/page-viewer/component-viewer-theme';
 // @import './app/pages/guide-list/guide-list-theme';
-@import './app/components/homepage/homepage-theme';
-@import './app/components/sign-in/sign-in-theme';
+@import './app/pages/homepage/homepage-theme';
+@import './app/pages/sign-in/sign-in-theme';
 // @import './app/shared/example-viewer/example-viewer-theme';
 // @import './app/shared/footer/footer-theme';
 @import './app/shared/navbar/navbar-theme';
@@ -33,7 +33,7 @@
   .docs-primary-header {
     background: mat-color($primary);
 
-    h1 {
+    h1, mat-icon {
       color: mat-color($primary, default-contrast);
     }
   }

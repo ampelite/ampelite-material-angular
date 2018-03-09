@@ -1,8 +1,12 @@
 <div class="docs-primary-header component-page-header">
-    <button mat-button class="sidenav-toggle" (click)="toggleSidenav.emit()"> 
-      <mat-icon>menu</mat-icon>
-    </button>
-  
-    <h1 >{{getTitle()}} </h1> 
-    <!-- focusOnNavigation -->
-  </div>
+  <button mat-button class="sidenav-toggle" (click)="toggleSidenav.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <h1>{{getTitle()}} </h1>
+  <!-- focusOnNavigation -->
+  <div class="flex-spacer"></div>
+  <!-- <button mat-icon-button (click)="openDialog.emit()">
+    <mat-icon>settings</mat-icon>
+  </button>   -->
+</div>

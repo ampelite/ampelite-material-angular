@@ -1,0 +1,18 @@
+.height-chart{
+    width: 100vw;
+    height: 40vh;
+}
+
+.flex-spacer{
+    flex-grow: 1;
+  }
+
+.bar-chart {
+    background-color: #3F51B5;
+
+    .toolbar {
+        text-align: right;
+        color: #fff;
+        padding: 0 16px;
+    }
+}

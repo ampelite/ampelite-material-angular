@@ -18,6 +18,10 @@ h1 {
   }
 }
 
+.flex-spacer{
+  flex-grow: 1;
+}
+
 .sidenav-toggle {
   padding: 0;
   margin: 8px;
@@ -28,6 +32,7 @@ h1 {
     align-items: center;
     justify-content: center;
   }
+
 
   mat-icon {
     font-size: 30px;

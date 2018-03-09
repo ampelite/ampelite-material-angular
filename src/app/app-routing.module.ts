@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomepageComponent } from './components/homepage/homepage.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
 import { CategoryListComponent } from './pages/category-list/category-list.component';
 import { SidenavComponent } from './pages/sidenav/sidenav.component';
 import { PageViewerComponent } from './pages/page-viewer/page-viewer.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { PoDailyComponent } from './components/po-daily/po-daily.component';
-import { MarketingReportComponent } from './components/marketing-report/marketing-report.component';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { PoDailyComponent } from './pages/po-daily/po-daily.component';
+import { MarketingReportComponent } from './pages/marketing-report/marketing-report.component';
 import { AuthGuard } from './guards';
 
 const routes: Routes = [
