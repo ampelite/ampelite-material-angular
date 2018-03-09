@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/index';
-import { AuthenticationService, UserService, DailypoService } from './services/index';
 import { MaterialModule } from './modules/material/material.module';
 
 import { NavBar } from './shared/navbar/navbar';
@@ -24,6 +23,13 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { PoDailyComponent, PoDailyOverviewDialog } from './pages/po-daily/po-daily.component';
 import { MarketingReportComponent } from './pages/marketing-report/marketing-report.component';
 
+import {
+  AuthenticationService,
+  UserService,
+  DailypoService,
+  GroupReportService,
+  GroupUnitService
+} from './services/index';
 
 @NgModule({
   entryComponents: [
@@ -58,6 +64,8 @@ import { MarketingReportComponent } from './pages/marketing-report/marketing-rep
     AuthenticationService,
     UserService,
     DailypoService,
+    GroupReportService,
+    GroupUnitService,
     ComponentPageTitle,
     DocumentationItems,
   ],

@@ -10,7 +10,16 @@ import { Subscription } from 'rxjs/Subscription';
 import { map, filter } from 'rxjs/operators';
 import { Chart } from 'chart.js';
 
-import { DailypoService } from '../../services'
+import {
+  DailypoService,
+  GroupReportService,
+  GroupUnitService
+} from '../../services';
+
+import {
+  GroupReport as GroupReportModel,
+  GroupUnit as GroupUnitModel
+} from '../../models'
 
 @Component({
   selector: 'app-po-daily',
@@ -22,7 +31,9 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
   params: Observable<Params>;
   routeParamSubscription: Subscription;
+  groupReportModel: GroupReportModel[] = [];
   loading = false;
+  
   // componentDocItem: DocItem;
 
   animal: string;
@@ -33,12 +44,20 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     public _componentPageTitle: ComponentPageTitle,
     public _dialog: MatDialog,
     private _route: ActivatedRoute,
-    private _dailypoService: DailypoService) { }
+    private _dailypoService: DailypoService,
+    private _dailypoGroupReportService: GroupReportService,
+    private _dailypoGroupUnitService
+  ) { }
 
   @ViewChild('barchart') barchart: ElementRef;
 
   ngOnInit() {
     this._componentPageTitle.title = 'Po. daily report';
+
+    this._dailypoGroupReportService.getAll()
+      .subscribe(res => {
+        this.groupReportModel = res.body;
+      })
 
     this._dailypoService.getGraphProduct()
       .subscribe(res => {
