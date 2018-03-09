@@ -54,10 +54,10 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._componentPageTitle.title = 'Po. daily report';
 
-    this._dailypoGroupReportService.getAll()
-      .subscribe(res => {
-        this.groupReportModel = res.body;
-      })
+    // this._dailypoGroupReportService.getAll()
+    //   .subscribe(res => {
+    //     this.groupReportModel = res.body;
+    //   })
 
     this._dailypoService.getGraphProduct()
       .subscribe(res => {
