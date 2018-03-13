@@ -300,6 +300,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       }
     });
 
+
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
       // this.animal = result;
@@ -327,8 +328,7 @@ export class PoDailyOverviewDialog {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  @Output()
-  selectionChange: EventEmitter<MatSelectChange>
+  @Output() selectionChange: EventEmitter<MatSelectChange>
 
   onNoClick(): void {
     this.dialogRef.close();
