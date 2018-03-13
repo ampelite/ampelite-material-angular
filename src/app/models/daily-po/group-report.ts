@@ -1,4 +1,4 @@
 export class GroupReport {
-    gorupCode: string;
+    groupCode: string;
     groupName: string;
 }

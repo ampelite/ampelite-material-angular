@@ -1,8 +1,8 @@
 export class GroupUnit {
-    UnitId: string
+    unitId: string
     GroupCode: string
-    UnitCode: string
-    UnitValue: string
-    UnitName: string
-    UnitTitle: string
+    unitCode: string
+    unitValue: string
+    unitName: string
+    unitTitle: string
 }

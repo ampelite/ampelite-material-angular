@@ -9,7 +9,7 @@ export class GroupReportService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    const apiURL = `${appConfig.apiUrl}/api/GroupReport`;
+    const apiURL = `${appConfig.apiUrl}/api/DailypoGroupReports`;
     return this.http.get<any>(apiURL);
   }
 }

@@ -1,14 +1,34 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Inject } from '@angular/core';
+import { 
+  Component, 
+  EventEmitter, 
+  OnInit, 
+  OnDestroy, 
+  ViewChild, 
+  ElementRef, 
+  Inject, 
+  NgModule, 
+  Output 
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params, RouterModule } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatButtonModule, MatIconModule } from '@angular/material';
-// import { DocItem, DocumentationItems, SECTIONS } from '../../shared/documentation-items/documentation-items';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatButtonModule,
+  MatIconModule
+} from '@angular/material';
+import { MatSelectModule, MatSelectChange } from '@angular/material/select';
 import { ComponentPageTitle } from '../../pages/page-title/page-title';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { Subscription } from 'rxjs/Subscription';
 import { map, filter } from 'rxjs/operators';
 import { Chart } from 'chart.js';
+
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import {
   DailypoService,
@@ -19,7 +39,9 @@ import {
 import {
   GroupReport as GroupReportModel,
   GroupUnit as GroupUnitModel
-} from '../../models'
+} from '../../models';
+
+import { parseDate } from '../../services/date-th'
 
 @Component({
   selector: 'app-po-daily',
@@ -32,8 +54,9 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   params: Observable<Params>;
   routeParamSubscription: Subscription;
   groupReportModel: GroupReportModel[] = [];
+  groupUnitModel: GroupUnitModel[] = [];
   loading = false;
-  
+
   // componentDocItem: DocItem;
 
   animal: string;
@@ -46,7 +69,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _dailypoService: DailypoService,
     private _dailypoGroupReportService: GroupReportService,
-    private _dailypoGroupUnitService
+    private _dailypoGroupUnitService: GroupUnitService
   ) { }
 
   @ViewChild('barchart') barchart: ElementRef;
@@ -54,20 +77,31 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._componentPageTitle.title = 'Po. daily report';
 
-    // this._dailypoGroupReportService.getAll()
-    //   .subscribe(res => {
-    //     this.groupReportModel = res.body;
-    //   })
-
-    this._dailypoService.getGraphProduct()
+    this._dailypoGroupReportService.getAll()
       .subscribe(res => {
-        this.drawChart(res.body);
+        this.groupReportModel = res;
+        const groupCode = this.groupReportModel[0].groupCode;
 
-        setTimeout(() => {
-          this.loading = true;
-        }, 800)
+        this._dailypoGroupUnitService.getByGroupCode(groupCode)
+          .subscribe(res => {
+            this.groupUnitModel = res;
 
-      }, error => console.error(error));
+            const date = (new Date()).toISOString();
+
+            const unit = this.groupUnitModel[0].unitCode;
+
+            this._dailypoService.getGraphProduct(date, groupCode, unit)
+              .subscribe(res => {
+                this.drawChart(res.body);
+
+                setTimeout(() => {
+                  this.loading = true;
+                }, 800)
+
+              }, error => console.error(error));
+
+          });
+      });
   }
 
   ngOnDestroy() {
@@ -257,7 +291,13 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     let dialogRef = this._dialog.open(PoDailyOverviewDialog, {
       minWidth: '250px',
       maxWidth: '300px',
-      data: { name: this.name, animal: this.animal }
+      data: {
+        groupReport: this.groupReportModel,
+        groupUnit: this.groupUnitModel,
+        selectedDate: new FormControl(new Date()),
+        selectedGroupReport: this.groupReportModel[0].groupCode,
+        selectedGroupUnit: this.groupUnitModel[0].unitCode,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -271,18 +311,31 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 @Component({
   selector: 'po-daily.component.dialog',
   templateUrl: 'po-daily.component.dialog.html',
+  styleUrls: ['po-daily.component.scss'],
+
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'th' },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+  ]
 })
+
 export class PoDailyOverviewDialog {
 
   constructor(
     public dialogRef: MatDialogRef<PoDailyOverviewDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
+
+  @Output()
+  selectionChange: EventEmitter<MatSelectChange>
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }
+
+
 
 
 

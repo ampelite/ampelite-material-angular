@@ -25,8 +25,12 @@
     }
 }
 
-// .mat-dialog-content {
+ .mat-dialog-content {
     mat-form-field {
-        display: block !important;
+        width: 100% !important;
     }
-// }
+ }
+
+ .flex-spacer{
+    flex-grow: 1;
+ }
