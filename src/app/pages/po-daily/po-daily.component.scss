@@ -1,3 +1,11 @@
+.warpper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: #fafafa;
+}
+
 .height-chart{
     width: 100vw;
     height: 40vh;
@@ -16,3 +24,41 @@
         padding: 0 16px;
     }
 }
+
+ .mat-dialog-content {
+    mat-form-field {
+        width: 100% !important;
+    }
+ }
+
+ .flex-spacer{
+    flex-grow: 1;
+ }
+
+ .mat-table {
+    overflow: auto;
+    max-height: 500px;
+
+    .mat-header-row{
+        min-height: 40px;
+    }
+
+    .mat-row{
+        min-height: 30px; 
+    }
+
+    .mat-cell {
+        font-size: 12px;
+    }
+
+    .mat-column-day {
+        min-width: 184px;
+    }
+
+    [class*="mat-column-"]:not(.mat-column-day) {
+        min-width: 60px;
+    }
+  }
+
+
+

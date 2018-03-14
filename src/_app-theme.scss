@@ -9,7 +9,7 @@
 @import './app/pages/homepage/homepage-theme';
 @import './app/pages/sign-in/sign-in-theme';
 // @import './app/shared/example-viewer/example-viewer-theme';
-// @import './app/shared/footer/footer-theme';
+@import './app/pages/page-footer/footer-theme';
 @import './app/shared/navbar/navbar-theme';
 // @import './app/shared/table-of-contents/table-of-contents-theme';
 @import './styles/api-theme';
@@ -39,7 +39,7 @@
   }
 
   .component-content {
-    padding: 20px 50px 50px 20px;
+    padding: 20px;
   }
 
   @media (max-width: 720px) {
@@ -61,7 +61,7 @@
   // @include docs-site-svg-theme($theme);
   // @include docs-site-tables-theme($theme);
   // @include example-viewer-theme($theme);
-  // @include footer-theme($theme);
+  @include footer-theme($theme);
   // @include guide-list-theme($theme);
   @include home-page-theme($theme);
   @include  sign-in-theme($theme);

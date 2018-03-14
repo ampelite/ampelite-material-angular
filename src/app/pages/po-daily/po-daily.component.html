@@ -1,25 +1,190 @@
+<!-- <ng-template #thenBlock> -->
+<div *ngIf="loading == false;" class="warpper">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<!-- </ng-template> -->
+
 <div class="bar-chart">
   <div class="toolbar">
     <button mat-mini-fab (click)="openDialog()">
-        <mat-icon>more_vert</mat-icon>
+      <mat-icon>more_vert</mat-icon>
     </button>
   </div>
   <canvas #barchart height="25vh" width="100%"></canvas>
 </div>
-<div class="component-content">
 
-  <mat-card>
-    <!-- <mat-card-header>
-    </mat-card-header> -->
+<div class="component-content mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
 
-    <mat-card-content>
-    </mat-card-content>
-    <mat-card-actions>
+    <!-- Position Column -->
+    <ng-container matColumnDef="day">
+      <mat-header-cell *matHeaderCellDef> Day </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.day}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="0">
+      <mat-header-cell *matHeaderCellDef> 1 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[0]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="1">
+      <mat-header-cell *matHeaderCellDef> 2 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[1]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="2">
+      <mat-header-cell *matHeaderCellDef> 3 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="3">
+      <mat-header-cell *matHeaderCellDef> 4 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="4">
+      <mat-header-cell *matHeaderCellDef> 5 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="5">
+      <mat-header-cell *matHeaderCellDef> 6 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[5]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="6">
+      <mat-header-cell *matHeaderCellDef> 7 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[6]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="7">
+      <mat-header-cell *matHeaderCellDef> 8 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[7]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="8">
+      <mat-header-cell *matHeaderCellDef> 9 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[8]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="9">
+      <mat-header-cell *matHeaderCellDef> 10 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[9]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="10">
+      <mat-header-cell *matHeaderCellDef> 11 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[10]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="11">
+      <mat-header-cell *matHeaderCellDef> 12 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[11]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="12">
+      <mat-header-cell *matHeaderCellDef> 13 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[12]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="13">
+      <mat-header-cell *matHeaderCellDef> 14 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[13]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="14">
+      <mat-header-cell *matHeaderCellDef> 15 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[14]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="15">
+      <mat-header-cell *matHeaderCellDef> 16 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[15]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="16">
+      <mat-header-cell *matHeaderCellDef> 17 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[16]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="17">
+      <mat-header-cell *matHeaderCellDef> 18 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[17]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="18">
+      <mat-header-cell *matHeaderCellDef> 19 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[18]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="19">
+      <mat-header-cell *matHeaderCellDef> 20 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[19]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="20">
+      <mat-header-cell *matHeaderCellDef> 21 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[20]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="21">
+      <mat-header-cell *matHeaderCellDef> 22 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[21]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="22">
+      <mat-header-cell *matHeaderCellDef> 23 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[22]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="23">
+      <mat-header-cell *matHeaderCellDef> 24 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[23]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="24">
+      <mat-header-cell *matHeaderCellDef> 25 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[24]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="25">
+      <mat-header-cell *matHeaderCellDef> 26 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[25]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="26">
+      <mat-header-cell *matHeaderCellDef> 27 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[26]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="27">
+      <mat-header-cell *matHeaderCellDef> 28 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[27]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="28">
+      <mat-header-cell *matHeaderCellDef> 29 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[28]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="29">
+      <mat-header-cell *matHeaderCellDef> 30 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[29]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="30">
+      <mat-header-cell *matHeaderCellDef> 31 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[30]}} </mat-cell>
+    </ng-container>
 
 
-    </mat-card-actions>
-  </mat-card>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
 </div>
+
+
 
 
 <!-- <div class="setting-component">

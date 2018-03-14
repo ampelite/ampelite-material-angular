@@ -11,9 +11,9 @@ export class DailypoService {
 
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    let apiURL = `${appConfig.apiUrl}/api/GraphProduct`;
-    let params = { Date: '2018-02-28T00:00:00', GroupCode: 'fibre', Unit: '1m' };
+  getGraphProduct(Date: string, GroupCode: string, Unit: string) {
+    const apiURL = `${appConfig.apiUrl}/api/GraphProduct`;
+    const params = { Date, GroupCode, Unit };
     return this.http.get<any>(apiURL, { params, observe: 'response' })
   }
 }
