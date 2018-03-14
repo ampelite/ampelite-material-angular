@@ -53,6 +53,8 @@ import { MaterialModule } from '../../modules/material/material.module';
 
 
 export class PoDailyComponent implements OnInit, OnDestroy {
+  groupCode: string;
+  unitCode: string;
   label = [];
   _data = [];
   loading = false;
