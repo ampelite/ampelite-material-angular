@@ -18,6 +18,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { ComponentPageTitle } from './pages/page-title/page-title';
 import { SidenavComponent } from './pages/sidenav/sidenav.component';
 import { PageHeaderComponent } from './pages/page-header/page-header.component';
+import { PageFooterComponent } from './pages/page-footer/page-footer.component';
 import { PageViewerComponent } from './pages/page-viewer/page-viewer.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { PoDailyComponent, PoDailyOverviewDialog } from './pages/po-daily/po-daily.component';
@@ -48,6 +49,7 @@ import {
     PoDailyComponent,
     PoDailyOverviewDialog,
     MarketingReportComponent,
+    PageFooterComponent,
   ],
   imports: [
     MaterialModule,
