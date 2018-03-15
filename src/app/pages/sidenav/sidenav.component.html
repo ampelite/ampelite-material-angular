@@ -13,11 +13,11 @@
           </ul>
       </nav> -->
     <nav>
-      
+
       <h3>SALE COORDINATOR</h3>
       <ul>
         <li>
-          <a [routerLink]="components/po-daily" routerLinkActive="docs-component-viewer-sidenav-item-selected">
+          <a [routerLink]="['po-daily']" routerLinkActive="docs-component-viewer-sidenav-item-selected">
             Po. daily report
           </a>
         </li>
@@ -34,7 +34,7 @@
     <app-page-header (toggleSidenav)="sidenav.toggle()">
     </app-page-header>
     <router-outlet></router-outlet>
-    <app-page-footer></app-page-footer>
   </div>
 
+  <app-page-footer></app-page-footer>
 </mat-sidenav-container>

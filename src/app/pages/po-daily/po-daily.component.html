@@ -3,7 +3,7 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 <!-- </ng-template> -->
-
+<!-- <app-po-daily-dialog (groupReportChange)=""></app-po-daily-dialog> -->
 <div class="bar-chart">
   <div class="toolbar">
     <button mat-mini-fab (click)="openDialog()">
@@ -181,7 +181,6 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-
 </div>
 
 
