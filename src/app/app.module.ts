@@ -31,6 +31,7 @@ import {
   GroupReportService,
   GroupUnitService
 } from './services/index';
+import { SalePromotionComponent } from './pages/sale-promotion/sale-promotion.component';
 
 @NgModule({
   entryComponents: [
@@ -50,6 +51,7 @@ import {
     PoDailyOverviewDialog,
     MarketingReportComponent,
     PageFooterComponent,
+    SalePromotionComponent,
   ],
   imports: [
     MaterialModule,
