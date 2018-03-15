@@ -1,27 +1,40 @@
 <mat-sidenav-container class="docs-component-viewer-sidenav-container">
-    <mat-sidenav #sidenav class="docs-component-viewer-sidenav"
-                [opened]="!isScreenSmall()"
-                [mode]="isScreenSmall() ? 'over' : 'side'"
-                [fixedInViewport]="isScreenSmall()"
-                fixedTopGap="92">
-      <nav *ngFor="let category of docItems.getCategories((params | async)?.section)">
+  <mat-sidenav #sidenav class="docs-component-viewer-sidenav" [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'"
+    [fixedInViewport]="isScreenSmall()" fixedTopGap="92">
+    <!-- <nav *ngFor="let category of docItems.getCategories((params | async)?.section)">
         <h3>{{category.name}}</h3>
-        <ul>
-          <li *ngFor="let component of category.items">
+          <ul>
+        <li *ngFor="let component of category.items">
             <a [routerLink]="'/' + (params | async)?.section+ '/' + component.id"
                routerLinkActive="docs-component-viewer-sidenav-item-selected">
               {{component.name}}
             </a>
           </li>
-        </ul>
-      </nav>
-    </mat-sidenav>
-  
-    <div class="docs-component-sidenav-content">
-      <app-page-header (toggleSidenav)="sidenav.toggle()">
-      </app-page-header>
-      <router-outlet></router-outlet>
-      <app-page-footer></app-page-footer>
-    </div>
-  </mat-sidenav-container>
-  
+          </ul>
+      </nav> -->
+    <nav>
+      
+      <h3>SALE COORDINATOR</h3>
+      <ul>
+        <li>
+          <a [routerLink]="components/po-daily" routerLinkActive="docs-component-viewer-sidenav-item-selected">
+            Po. daily report
+          </a>
+        </li>
+        <li>
+          <a href="http://203.154.45.40/Salepromotion/main" routerLinkActive="docs-component-viewer-sidenav-item-selected">
+            Sale promotion
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </mat-sidenav>
+
+  <div class="docs-component-sidenav-content">
+    <app-page-header (toggleSidenav)="sidenav.toggle()">
+    </app-page-header>
+    <router-outlet></router-outlet>
+    <app-page-footer></app-page-footer>
+  </div>
+
+</mat-sidenav-container>

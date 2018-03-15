@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sale-promotion',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalePromotionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router) { }
 
   ngOnInit() {
+    // window.location.href ='http://203.154.45.40/Salepromotion/main';
   }
 
 }
