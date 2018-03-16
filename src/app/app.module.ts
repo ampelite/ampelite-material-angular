@@ -21,7 +21,7 @@ import { PageHeaderComponent } from './pages/page-header/page-header.component';
 import { PageFooterComponent } from './pages/page-footer/page-footer.component';
 import { PageViewerComponent } from './pages/page-viewer/page-viewer.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { PoDailyComponent, PoDailyOverviewDialog } from './pages/po-daily/po-daily.component';
+import { PoDailyComponent } from './pages/po-daily/po-daily.component';
 import { MarketingReportComponent } from './pages/marketing-report/marketing-report.component';
 
 import {
@@ -32,11 +32,13 @@ import {
   GroupUnitService
 } from './services/index';
 import { SalePromotionComponent } from './pages/sale-promotion/sale-promotion.component';
+import { DialogModule  } from './pages/po-daily/dialogs/dialog.module';
+import { ProductDailyTableComponent } from './pages/po-daily/tables/product-daily-table/product-daily-table.component';
 
 @NgModule({
   entryComponents: [
     PoDailyComponent,
-    PoDailyOverviewDialog
+    // PoDailyOverviewDialog
   ],
   declarations: [
     AppComponent,
@@ -48,10 +50,10 @@ import { SalePromotionComponent } from './pages/sale-promotion/sale-promotion.co
     PageViewerComponent,
     SignInComponent,
     PoDailyComponent,
-    PoDailyOverviewDialog,
     MarketingReportComponent,
     PageFooterComponent,
     SalePromotionComponent,
+    ProductDailyTableComponent
   ],
   imports: [
     MaterialModule,
@@ -61,7 +63,8 @@ import { SalePromotionComponent } from './pages/sale-promotion/sale-promotion.co
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DialogModule
   ],
   providers: [
     AuthGuard,

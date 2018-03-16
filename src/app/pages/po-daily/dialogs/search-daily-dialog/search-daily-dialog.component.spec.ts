@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PoDailyComponent } from './po-daily.component';
+import { SearchDailyDialogComponent } from './search-daily-dialog.component';
 
-describe('PoDailyComponent', () => {
-  let component: PoDailyComponent;
-  let fixture: ComponentFixture<PoDailyComponent>;
+describe('SearchDailyDialogComponent', () => {
+  let component: SearchDailyDialogComponent;
+  let fixture: ComponentFixture<SearchDailyDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PoDailyComponent ]
+      declarations: [ SearchDailyDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PoDailyComponent);
+    fixture = TestBed.createComponent(SearchDailyDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
