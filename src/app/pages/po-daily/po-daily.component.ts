@@ -84,7 +84,10 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   public openDialog() {
     this._dialogService
       .searching('Confirm Dialog', 'Are you sure you want to do this?')
-      .subscribe(res => this.result = res);
+      .subscribe(() => {
+        const date = (new Date()).toISOString();
+        this.serviceGetGraphProduct(date, 'fibre', 'km', true);
+      });
   }
 
   @ViewChild('barchart') barchart: ElementRef;
@@ -102,23 +105,11 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         this._dailypoGroupUnitService.getByGroupCode(groupCode)
           .subscribe(res => {
             groupUnitModel = res;
-
             const date = (new Date()).toISOString();
-
             const unit = groupUnitModel[0].unitCode;
 
             // get Graph product service
-            this._dailypoService.getGraphProduct(date, groupCode, unit)
-              .subscribe(res => {
-                this.drawChart(res.body);
-
-                this.drawDataTable(res.body);
-
-                setTimeout(() => {
-                  this.loading = true;
-                }, 800)
-
-              }, error => console.error(error));
+            this.serviceGetGraphProduct(date, groupCode, unit, true);
 
           });
       });
@@ -128,8 +119,24 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     // this.routeParamSubscription.unsubscribe();
   }
 
+  serviceGetGraphProduct(date: string, groupCode: string, unit: string, isDrawTable: boolean) {
+    this._dailypoService.getGraphProduct(date, groupCode, unit)
+      .subscribe(res => {
+        this.drawChart(res.body);
+
+        isDrawTable && this.drawDataTable(res.body);
+
+        setTimeout(() => {
+          this.loading = true;
+        }, 800)
+
+      }, error => console.error(error));
+  }
+
   drawChart(array) {
-    let  label = [];
+    // const array = this.graphProductArray;
+
+    let label = [];
     const data = [];
     let j = 0;
     for (let i = 1; i < 32; i++) {

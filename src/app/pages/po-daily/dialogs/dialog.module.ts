@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatDatepickerModule, MatFormFieldModule } from '@angular/material';
 
 //service
 import { DialogService } from './dialog.service'
@@ -12,7 +12,9 @@ import { SearchDailyDialogComponent } from './search-daily-dialog/search-daily-d
   imports: [
     CommonModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
   ],
   declarations: [SearchDailyDialogComponent],
   exports:[SearchDailyDialogComponent],

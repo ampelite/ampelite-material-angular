@@ -10,7 +10,7 @@ export class DialogService {
 
   constructor(private dialog: MatDialog) { }
 
-  public searching(title: string, message: string): Observable<boolean> {
+  public searching(title: string, message: string): Observable<string> {
     let dialogRef: MatDialogRef<SearchDailyDialogComponent>;
 
     dialogRef = this.dialog.open(SearchDailyDialogComponent);

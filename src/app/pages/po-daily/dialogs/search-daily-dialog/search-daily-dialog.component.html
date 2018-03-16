@@ -1,7 +1,37 @@
+<mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="data.selectedDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
 <p>{{ title }}</p>
 <p>{{ message }}</p>
 
-<button type="button" mat-raised-button 
-    (click)="dialogRef.close(true)">OK</button>
-<button type="button" mat-button 
-    (click)="dialogRef.close()">Cancel</button>
+<button type="button" mat-raised-button (click)="dialogRef.close(true)">OK</button>
+<button type="button" mat-button (click)="dialogRef.close()">Cancel</button>
+
+<!-- <div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="data.selectedDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select #groupReport placeholder="Choose a group" (change)="groupReportChange()" [(value)]="data.selectedGroupReport">
+      <mat-option *ngFor="let rpt of data.groupReport" [value]="rpt.groupCode">
+        {{ rpt.groupName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select #groupUnit placeholder="Choose a unit" [(value)]="data.selectedGroupUnit">
+      <mat-option *ngFor="let unit of data.groupUnit" [value]="unit.unitCode">
+        {{ unit.unitValue }} {{ unit.unitName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<p> Selected value: {{data.selectedGroupReport}} </p>
+<div mat-dialog-actions>
+  <div class="flex-spacer"></div>
+  <button mat-raised-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
+</div> -->
