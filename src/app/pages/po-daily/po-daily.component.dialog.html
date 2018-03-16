@@ -7,7 +7,7 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
-    <mat-select #groupReport placeholder="Choose a group" [(value)]="data.selectedGroupReport">
+    <mat-select #groupReport placeholder="Choose a group" (change)="groupReportChange()" [(value)]="data.selectedGroupReport">
       <mat-option *ngFor="let rpt of data.groupReport" [value]="rpt.groupCode">
         {{ rpt.groupName }}
       </mat-option>

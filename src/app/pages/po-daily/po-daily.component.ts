@@ -18,7 +18,8 @@ import {
   MAT_DIALOG_DATA,
   MatButtonModule,
   MatIconModule,
-  MatTableDataSource
+  MatTableDataSource,
+  MatOption
 } from '@angular/material';
 import { MatSelectModule, MatSelectChange } from '@angular/material/select';
 import { ComponentPageTitle } from '../../pages/page-title/page-title';
@@ -322,7 +323,6 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       // this.animal = result;
     });
   }
-
 }
 
 @Component({
@@ -338,14 +338,20 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 })
 
 export class PoDailyOverviewDialog {
-
+  selected: MatOption;
   constructor(
     public dialogRef: MatDialogRef<PoDailyOverviewDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   // @Output() groupReportChange: EventEmitter<MatSelectChange>;
+  
   @ViewChild('groupReport') groupReport: ElementRef;
+
+  groupReportChange()
+  {
+    console.log(this.data.selectedGroupReport);
+  }
 
   onNoClick(): void {
     // this.dialogRef.close();
