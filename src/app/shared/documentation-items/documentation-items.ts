@@ -37,7 +37,7 @@ const DOCS: {[key: string]: DocCategory[]} = {
       name: 'Sale coordinator',
       items: [
         {id: 'po-daily', name: 'PO. daily report', component: 'app-po-daily', examples: []},
-        {id: 'sale-promotion', name: 'Sale promotion', component: 'app-marketing-report', examples: []},
+        {id: 'sale-promotion', name: 'Sale promotion', component: 'app-sale-promotion', examples: []},
       ]
     },
     

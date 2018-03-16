@@ -14,7 +14,6 @@ export class PageHeaderComponent {
   ) { }
 
   @Output() toggleSidenav = new EventEmitter<void>();
-  @Output() openDialog = new EventEmitter<void>();
 
   getTitle() {
     return this._componentPageTitle.title;

@@ -18,7 +18,8 @@ import {
   MAT_DIALOG_DATA,
   MatButtonModule,
   MatIconModule,
-  MatTableDataSource
+  MatTableDataSource,
+  MatOption
 } from '@angular/material';
 import { MatSelectModule, MatSelectChange } from '@angular/material/select';
 import { ComponentPageTitle } from '../../pages/page-title/page-title';
@@ -45,26 +46,28 @@ import {
 import { parseDate } from '../../services/date-th'
 import { MaterialModule } from '../../modules/material/material.module';
 
+let groupReportModel: GroupReportModel[] = [];
+
 @Component({
   selector: 'app-po-daily',
   templateUrl: './po-daily.component.html',
   styleUrls: ['./po-daily.component.scss']
 })
 
-
 export class PoDailyComponent implements OnInit, OnDestroy {
-  label = [];
-  _data = [];
-  loading = false;
-  params: Observable<Params>;
-  routeParamSubscription: Subscription;
-  groupReportModel: GroupReportModel[] = [];
-  groupUnitModel: GroupUnitModel[] = [];
+
+ public label = [];
+ public _data = [];
+ public loading = false;
+ public params: Observable<Params>;
+ public routeParamSubscription: Subscription;
+  // groupReportModel: GroupReportModel[] = [];
+ public groupUnitModel: GroupUnitModel[] = [];
   
   // Data table
-  ELEMENT_DATA: Element[];  
-  displayedColumns = ['day'];
-  dataSource;
+ public ELEMENT_DATA: Element[];  
+ public displayedColumns = ['day'];
+ public dataSource;
   
   constructor(
     public _componentPageTitle: ComponentPageTitle,
@@ -82,8 +85,8 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
     this._dailypoGroupReportService.getAll()
       .subscribe(res => {
-        this.groupReportModel = res;
-        const groupCode = this.groupReportModel[0].groupCode;
+        groupReportModel = res;
+        const groupCode = groupReportModel[0].groupCode;
 
         this._dailypoGroupUnitService.getByGroupCode(groupCode)
           .subscribe(res => {
@@ -307,10 +310,10 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       minWidth: '250px',
       maxWidth: '300px',
       data: {
-        groupReport: this.groupReportModel,
+        groupReport: groupReportModel,
         groupUnit: this.groupUnitModel,
         selectedDate: new FormControl(new Date()),
-        selectedGroupReport: this.groupReportModel[0].groupCode,
+        selectedGroupReport: groupReportModel[0].groupCode,
         selectedGroupUnit: this.groupUnitModel[0].unitCode,
       }
     });
@@ -320,11 +323,10 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       // this.animal = result;
     });
   }
-
 }
 
 @Component({
-  selector: 'po-daily.component.dialog',
+  selector: 'app-po-daily-dialog',
   templateUrl: 'po-daily.component.dialog.html',
   styleUrls: ['po-daily.component.scss'],
 
@@ -336,16 +338,24 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 })
 
 export class PoDailyOverviewDialog {
-
+  selected: MatOption;
   constructor(
     public dialogRef: MatDialogRef<PoDailyOverviewDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  @Output() selectionChange: EventEmitter<MatSelectChange>
+  // @Output() groupReportChange: EventEmitter<MatSelectChange>;
+  
+  @ViewChild('groupReport') groupReport: ElementRef;
+
+  groupReportChange()
+  {
+    console.log(this.data.selectedGroupReport);
+  }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    // this.dialogRef.close();
+    console.log(this.data.selectedGroupReport);
   }
 }
 

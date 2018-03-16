@@ -8,6 +8,7 @@ import { PageViewerComponent } from './pages/page-viewer/page-viewer.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { PoDailyComponent } from './pages/po-daily/po-daily.component';
 import { MarketingReportComponent } from './pages/marketing-report/marketing-report.component';
+import { SalePromotionComponent } from './pages/sale-promotion/sale-promotion.component';
 import { AuthGuard } from './guards';
 
 const routes: Routes = [
@@ -39,6 +40,12 @@ const routes: Routes = [
         path: 'marketing-report',
         children: [
           { path: '', component: MarketingReportComponent, canActivate: [AuthGuard] },
+        ],
+      },
+      {
+        path: 'sale-promotion',
+        children: [
+          { path: '', component: SalePromotionComponent, canActivate: [AuthGuard] },
         ],
       },
     ],
