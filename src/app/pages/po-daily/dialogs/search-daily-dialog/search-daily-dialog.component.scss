@@ -1,0 +1,16 @@
+.flex-spacer{
+    flex-grow: 1;
+ }
+
+ .mat-form-field {
+     width: 100%;
+ }
+
+ .mat-calendar-header {
+    background-color: #3f51b5;
+    color: #fff;
+
+    .mat-calendar-arrow {
+        border-top-color: none;
+    }
+ }
