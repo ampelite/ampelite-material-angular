@@ -61,10 +61,15 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   public groupReportModel: GroupReportModel[] = [];
   public groupUnitModel: GroupUnitModel[] = [];
 
+  public ctx: any;
+  public myChart: any;
+  public label = [];
+  public dataSet = [];
+  public options: any;
   public titleChart: string;
 
   // Data table
-  public ELEMENT_DATA: Element[];
+  // public ELEMENT_DATA: Element[];
   public displayedColumns = ['day'];
   public dataSource;
 
@@ -82,16 +87,15 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     this._dialogService
       .searching(this.groupReportModel, this.groupUnitModel)
       .subscribe(res => {
-        debugger
         let date = res['selectedDate'].toISOString();
         let groupCode = res['selectedGroupReport'];
         let unit = res['selectedGroupUnit'];
         this.titleChart = 'Group ${}';
-        this.serviceGetGraphProduct(date, groupCode, unit, true);
+        this.serviceGetGraphProduct(date, groupCode, unit, 'update');
       });
   }
 
-  @ViewChild('barchart') barchart: ElementRef;
+  @ViewChild('barchart') barChart: ElementRef;
 
   ngOnInit() {
     this._componentPageTitle.title = 'Po. daily report';
@@ -110,23 +114,32 @@ export class PoDailyComponent implements OnInit, OnDestroy {
             const unit = this.groupUnitModel[0].unitCode;
 
             // get Graph product service
-            this.serviceGetGraphProduct(date, groupCode, unit, true);
-
+            this.serviceGetGraphProduct(date, groupCode, unit, 'create');
+            // this.createChart();
           });
       });
 
+  }
+
+  ngAfterViewInit() {
+    this.ctx = this.barChart.nativeElement.getContext("2d");
   }
 
   ngOnDestroy() {
     // this.routeParamSubscription.unsubscribe();
   }
 
-  serviceGetGraphProduct(date: string, groupCode: string, unit: string, isDrawTable: boolean) {
+  serviceGetGraphProduct(date: string, groupCode: string, unit: string, event: string) {
     this._dailypoService.getGraphProduct(date, groupCode, unit)
       .subscribe(res => {
         this.drawChart(res.body);
+        this.drawDataTable(res.body);
 
-        isDrawTable && this.drawDataTable(res.body);
+        if (event == 'create') {
+          this.createChart();
+        } else if (event == 'update') {
+          this.updateChart();
+        }
 
         setTimeout(() => {
           this.loading = true;
@@ -137,30 +150,28 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
   drawChart(array) {
 
-    let label: any[] = [];
-    let data: any[] = [];
+    this.dataSet = [];
+    this.label = [];
+    this.displayedColumns = [];
+
     let j = 0;
     for (let i = 1; i < 32; i++) {
-      label.push(i);
+      this.label.push(i);
       this.displayedColumns.push((j++).toString());
     }
 
-    const product = array.filter(res => { return res.type == "product" });
-    const sum = array.filter(res => { return res.type == "sum" });
-    const avg = array.filter(res => { return res.type == "avg" });
-    const accu = array.filter(res => { return res.type == "accu" });
-
-    const ctx = this.barchart.nativeElement.getContext("2d");
-    const white = '#fff';
-
-    const gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
+    let color = ['#C5CAE9', '#F8BBD0', '#E57373', '#BBDEFB', '#80CBC4', '#CCFF90', '#FFD180'];
+    let gradientFill = this.ctx.createLinearGradient(0, 0, 0, 350);
     gradientFill.addColorStop(0, "rgba(255, 202, 40, 0.6)");
     gradientFill.addColorStop(1, "rgba(255, 202, 250, 0)");
 
-    const dataSet = [];
+    let product = array.filter(res => { return res.type == "product" });
+    let sum = array.filter(res => { return res.type == "sum" });
+    let avg = array.filter(res => { return res.type == "avg" });
+    let accu = array.filter(res => { return res.type == "accu" });
 
     avg.map(e => {
-      dataSet.push({
+      this.dataSet.push({
         label: e.name,
         data: e.unit,
         type: 'line',
@@ -181,11 +192,12 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     })
 
     accu.map(e => {
-      dataSet.push({
+      this.dataSet.push({
         yAxisID: e.type,
         label: e.name,
         data: e.unit,
         type: 'line',
+        lineTension: 0,
         borderWidth: 1.5,
         borderColor: "rgb(255, 202, 40)",
         pointBorderColor: "rgba(255, 202, 40, 0.6)",
@@ -201,40 +213,33 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       });
     })
 
-    product.map(e => {
-      let r = Math.floor(Math.random() * 255) + 100;
-      let g = Math.floor(Math.random() * 255) + 135;
-      let b = Math.floor(Math.random() * 255) + 60;
-
-      dataSet.push({
+    product.map((e, i) => {
+      this.dataSet.push({
         label: e.name,
         data: e.unit,
         type: 'bar',
         stack: 'stack',
         fillColor: "#79D1CF",
         strokeColor: "#79D1CF",
-        backgroundColor: `rgba(${r}, ${g}, ${b}, 0.8)`,
-        // borderColor: white,
+        backgroundColor: color[i],
         borderWidth: 1
       });
     })
 
-    const dataset = {
-      datasets: dataSet,
-      labels: label
-    };
+  }
 
-    const option = {
+  createChart() {
+    const options = {
       scales: {
         xAxes: [
           {
             stacked: true,
             gridLines: {
-              color: white,
+              color: "#fff",
               drawOnChartArea: false,
             },
             ticks: {
-              fontColor: white
+              fontColor: "#fff"
             }
           }
         ],
@@ -244,12 +249,12 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
             gridLines: {
               drawTicks: true,
-              zeroLineColor: white
+              zeroLineColor: "#fff"
               // drawOnChartArea: false,              
               // color: white,
             },
             ticks: {
-              fontColor: white,
+              fontColor: "#fff",
               padding: 5
             }
           }
@@ -257,11 +262,11 @@ export class PoDailyComponent implements OnInit, OnDestroy {
             id: 'accu',
             position: 'right',
             gridLines: {
-              color: white,
+              color: "#fff",
               drawOnChartArea: false,
             },
             ticks: {
-              fontColor: white,
+              fontColor: "#fff",
               padding: 5
             }
           }
@@ -269,36 +274,26 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       },
       animation: {
         onComplete: function () {
-          const chartInstance = this.chart,
+          let chartInstance = this.chart,
             ctx = chartInstance.ctx;
 
           ctx.textAlign = 'center';
           ctx.textBaseline = 'bottom';
           ctx.fillStyle = 'rgba(0, 0, 0, 0.87)';
-
-          // this.data.datasets.forEach(function (dataset, i) {
-          //   if (dataset.type == 'bar') {
-          //     const meta = chartInstance.controller.getDatasetMeta(i);
-          //     meta.data.forEach(function (bar, index) {
-          //       const data = dataset.data[index];
-          //       ctx.fillText(data, bar._model.x, bar._model.y - 5);
-          //     });
-          //   }
-          // });
         }
       },
       legend: {
         display: true,
-        fontColor: white,
+        fontColor: "#fff",
         labels: {
-          fontColor: white
+          fontColor: "#fff"
         }
         // position: 'bottom',
       },
       title: {
         display: true,
         text: 'Custom Chart Title',
-        fontColor: white,
+        fontColor: "#fff",
       },
       tooltips: {
         mode: 'x',
@@ -306,21 +301,30 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       }
     };
 
-    const myChart = new Chart(ctx, {
+    this.myChart = new Chart(this.ctx, {
       type: 'bar',
-      data: dataset,
-      options: option,
+      data: {
+        datasets: this.dataSet,
+        labels: this.label
+      },
+      options: options,
     });
+  }
+
+  updateChart() {
+    this.myChart.data.datasets = this.dataSet;
+    this.myChart.data.labels = this.label;
+    this.myChart.update();
   }
 
   drawDataTable(array) {
-
-    this.ELEMENT_DATA = array.map(item => {
+    let ELEMENT_DATA: Element[] = array.map(item => {
       return { day: item.name, ...item.unit };
     });
 
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
   }
+
 }
 
 export interface Element {
