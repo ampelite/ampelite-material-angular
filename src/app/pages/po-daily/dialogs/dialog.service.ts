@@ -19,7 +19,13 @@ export class DialogService {
     public GroupUnitService: GroupUnitService
   ) { }
 
-  public searching(GroupReportModel, GroupUnitModel): Observable<any[]> {
+  public searching(
+    GroupReportModel: GroupReportModel[],
+    GroupUnitModel: GroupUnitModel[],
+    selectedGroupReport: string,
+    selectedGroupUnit: string,
+    selectedDate: Date): Observable<any[]> {
+
     let dialogRef: MatDialogRef<SearchDailyDialogComponent>;
 
     dialogRef = this.dialog.open(SearchDailyDialogComponent, {
@@ -28,9 +34,9 @@ export class DialogService {
       data: {
         groupReport: GroupReportModel,
         groupUnit: GroupUnitModel,
-        selectedGroupReport: '',
-        selectedGroupUnit: '',
-        selectedDate: new Date
+        selectedGroupReport,
+        selectedGroupUnit,
+        selectedDate
       }
     });
 

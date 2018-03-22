@@ -1,27 +1,8 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-  Inject,
-  NgModule,
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, OnDestroy, ViewChild, ElementRef, Inject, NgModule, Output, NgZone } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params, RouterModule } from '@angular/router';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatButtonModule,
-  MatIconModule,
-  MatTableDataSource,
-  MatOption,
-  MatDatepickerInputEvent
-} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatButtonModule, MatIconModule, MatTableDataSource, MatOption, MatDatepickerInputEvent } from '@angular/material';
 import { MatSelectModule, MatSelectChange } from '@angular/material/select';
 import { ComponentPageTitle } from '../../pages/page-title/page-title';
 import { Observable } from 'rxjs/Observable';
@@ -30,17 +11,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { map, filter, mergeMap } from 'rxjs/operators';
 import { Chart } from 'chart.js';
 
+import { DailypoService, GroupReportService, GroupUnitService } from '../../services';
 
-import {
-  DailypoService,
-  GroupReportService,
-  GroupUnitService
-} from '../../services';
-
-import {
-  GroupReport as GroupReportModel,
-  GroupUnit as GroupUnitModel
-} from '../../models';
+import { GroupReport as GroupReportModel, GroupUnit as GroupUnitModel } from '../../models';
 
 import { extend } from 'webdriver-js-extender';
 
@@ -48,6 +21,8 @@ import { extend } from 'webdriver-js-extender';
 import { DialogService } from './dialogs/dialog.service';
 
 import { SearchDailyDialogComponent } from './dialogs/search-daily-dialog/search-daily-dialog.component'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 
 @Component({
   selector: 'app-po-daily',
@@ -56,66 +31,119 @@ import { SearchDailyDialogComponent } from './dialogs/search-daily-dialog/search
 })
 
 export class PoDailyComponent implements OnInit, OnDestroy {
+  // private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
+  private isXSmallScreen = matchMedia(Breakpoints.XSmall);
+  private isSmallScreen = matchMedia(Breakpoints.Small);
+  private isMediumScreen = matchMedia(Breakpoints.Medium);
+  private isLargeScreen = matchMedia(Breakpoints.Large);
 
   public loading = false;
-  public groupReportModel: GroupReportModel[] = [];
-  public groupUnitModel: GroupUnitModel[] = [];
+  private groupReportModel: GroupReportModel[] = [];
+  private groupUnitModel: GroupUnitModel[] = [];
+  private selectedGroupReport: string;
+  private selectedGroupUnit: string;
+  private selectedDate: Date;
 
-  public ctx: any;
-  public myChart: any;
-  public label = [];
-  public dataSet = [];
-  public options: any;
-  public titleChart: string;
+  private dailyData: any[] = [];
+
+  // Chart 
+  private ctx: any;
+  private myChart: any;
+  private chartHeight: number;
+  private label = [];
+  private dataSet = [];
+  private options: any;
+  private titleChart: string;
+  // private date = (new Date()).toISOString();
+  // private groupCode: string;
+  // private unit: string;
+  private lastDays: number = 31;
 
   // Data table
-  // public ELEMENT_DATA: Element[];
-  public displayedColumns = ['day'];
-  public dataSource;
+  private ELEMENT_DATA: Element[];
+  private displayedColumns = ['day'];
+  private dataSource;
 
   constructor(
     public _componentPageTitle: ComponentPageTitle,
-    public _dialog: MatDialog,
     private _route: ActivatedRoute,
     private _dailypoService: DailypoService,
     private _dailypoGroupReportService: GroupReportService,
     private _dailypoGroupUnitService: GroupUnitService,
-    private _dialogService: DialogService
-  ) { }
+    private _dialogService: DialogService,
+    zone: NgZone,
+    // private breakpointObserver: BreakpointObserver
+  ) {
+    // this.isXSmallScreen.addListener(mql => zone.run(() => this.isXSmallScreen = mql));
+    // this.isSmallScreen.addListener(mql => zone.run(() => this.isXSmallScreen = mql));
+    // this.isMediumScreen.addListener(mql => zone.run(() => this.isXSmallScreen = mql));
+  }
 
-  public openDialog() {
+  openDialog() {
     this._dialogService
-      .searching(this.groupReportModel, this.groupUnitModel)
+      .searching(this.groupReportModel, this.groupUnitModel, 'fibre', '1m', new Date())
       .subscribe(res => {
-        let date = res['selectedDate'].toISOString();
-        let groupCode = res['selectedGroupReport'];
-        let unit = res['selectedGroupUnit'];
+        this.selectedDate = res['selectedDate'].toISOString();
+        this.selectedGroupReport = res['selectedGroupReport'];
+        this.selectedGroupUnit = res['selectedGroupUnit'];
         this.titleChart = 'Group ${}';
-        this.serviceGetGraphProduct(date, groupCode, unit, 'update');
       });
   }
 
   @ViewChild('barchart') barChart: ElementRef;
 
   ngOnInit() {
+
     this._componentPageTitle.title = 'Po. daily report';
+
+    if (this.isXSmallScreen.matches) {
+      this.lastDays = 6;
+      this.barChart.nativeElement.height = 80;
+    }
+
+    if (this.isSmallScreen.matches) {
+      this.lastDays = 13;
+      this.barChart.nativeElement.height = 50;
+    }
+
+    if (this.isMediumScreen.matches) {
+      this.lastDays = 31;
+      this.barChart.nativeElement.height = 35;
+    }
+
+    if (this.isLargeScreen.matches) {
+      this.lastDays = 31;
+      this.barChart.nativeElement.height = 30;
+    }
 
     // get Group report service
     this._dailypoGroupReportService.getAll().subscribe(
       res => {
         this.groupReportModel = res;
-        const groupCode = this.groupReportModel[0].groupCode;
+        this.selectedGroupReport = this.groupReportModel[0].groupCode;
 
         // get Group unit service
-        this._dailypoGroupUnitService.getByGroupCode(groupCode)
+        this._dailypoGroupUnitService.getByGroupCode(this.selectedGroupReport)
           .subscribe(res => {
             this.groupUnitModel = res;
-            const date = (new Date()).toISOString();
-            const unit = this.groupUnitModel[0].unitCode;
+            this.selectedDate = new Date();
+            this.selectedGroupUnit = this.groupUnitModel[0].unitCode;
 
             // get Graph product service
-            this.serviceGetGraphProduct(date, groupCode, unit, 'create');
-            // this.createChart();
+            this._dailypoService.getGraphProduct(this.selectedDate.toISOString(), this.selectedGroupReport, this.selectedGroupUnit)
+              .subscribe(res => {
+                this.dailyData = res.body;
+                // if (this.isScreenSmall()) {
+                // this.lastDays = 7;
+                // }
+                this.setData();
+                this.createChart();
+                this.drawDataTable();
+                setTimeout(() => {
+                  this.loading = true;
+                }, 800)
+
+              }, error => console.error(error));
           });
       });
 
@@ -129,53 +157,32 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     // this.routeParamSubscription.unsubscribe();
   }
 
-  serviceGetGraphProduct(date: string, groupCode: string, unit: string, event: string) {
-    this._dailypoService.getGraphProduct(date, groupCode, unit)
-      .subscribe(res => {
-        this.drawChart(res.body);
-        this.drawDataTable(res.body);
-
-        if (event == 'create') {
-          this.createChart();
-        } else if (event == 'update') {
-          this.updateChart();
-        }
-
-        setTimeout(() => {
-          this.loading = true;
-        }, 800)
-
-      }, error => console.error(error));
-  }
-
-  drawChart(array) {
-
+  setData() {
     this.dataSet = [];
     this.label = [];
-    this.displayedColumns = [];
+    this.displayedColumns = ['day'];
 
-    let j = 0;
-    for (let i = 1; i < 32; i++) {
+    let dateNow = this.selectedDate;
+    let lastDate = this.selectedDate;
+    lastDate.setDate(lastDate.getDate() - this.lastDays);
+    let firstDate = ((lastDate.getMonth() + 1) < (dateNow.getMonth() + 1)) ? 1 : lastDate.getDate();
+
+    for (let i = firstDate; i <= dateNow.getDate(); i++) {
       this.label.push(i);
-      this.displayedColumns.push((j++).toString());
+      this.displayedColumns.push((i - 1).toString());
     }
 
-    let color = ['#C5CAE9', '#F8BBD0', '#E57373', '#BBDEFB', '#80CBC4', '#CCFF90', '#FFD180'];
-    let gradientFill = this.ctx.createLinearGradient(0, 0, 0, 350);
-    gradientFill.addColorStop(0, "rgba(255, 202, 40, 0.6)");
-    gradientFill.addColorStop(1, "rgba(255, 202, 250, 0)");
-
-    let product = array.filter(res => { return res.type == "product" });
-    let sum = array.filter(res => { return res.type == "sum" });
-    let avg = array.filter(res => { return res.type == "avg" });
-    let accu = array.filter(res => { return res.type == "accu" });
+    let product = this.dailyData.filter(res => { return res.type == "product" });
+    let sum = this.dailyData.filter(res => { return res.type == "sum" });
+    let avg = this.dailyData.filter(res => { return res.type == "avg" });
+    let accu = this.dailyData.filter(res => { return res.type == "accu" });
 
     avg.map(e => {
       this.dataSet.push({
         label: e.name,
-        data: e.unit,
+        data: e.unit.slice(firstDate - 1), // -1 เพื่อเปลี่ยนวันที่ให้เป็นตำแหน่ง index
         type: 'line',
-        borderWidth: 1.5,
+        borderWidth: 3,
         pointStyle: 'rectRot',
         borderColor: "rgb(255, 99, 132)",
         pointBorderColor: "rgba(255, 99, 132, 0.6)",
@@ -195,10 +202,10 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       this.dataSet.push({
         yAxisID: e.type,
         label: e.name,
-        data: e.unit,
+        data: e.unit.slice(firstDate - 1), // -1 เพื่อเปลี่ยนวันที่ให้เป็นตำแหน่ง index
         type: 'line',
         lineTension: 0,
-        borderWidth: 1.5,
+        borderWidth: 3,
         borderColor: "rgb(255, 202, 40)",
         pointBorderColor: "rgba(255, 202, 40, 0.6)",
         pointBackgroundColor: "rgba(255, 255, 255, 0.6)",
@@ -209,23 +216,34 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         pointHoverBorderWidth: 1,
         pointRadius: 3,
         fill: true,
-        backgroundColor: gradientFill,
+        backgroundColor: this.gradientFill(),
       });
     })
 
     product.map((e, i) => {
       this.dataSet.push({
         label: e.name,
-        data: e.unit,
+        data: e.unit.slice(firstDate - 1), // -1 เพื่อเปลี่ยนวันที่ให้เป็นตำแหน่ง index
         type: 'bar',
         stack: 'stack',
         fillColor: "#79D1CF",
         strokeColor: "#79D1CF",
-        backgroundColor: color[i],
+        backgroundColor: this.colors(i),
         borderWidth: 1
       });
     })
+  }
 
+  colors(i: number) {
+    let color = ['#C5CAE9', '#F8BBD0', '#E57373', '#BBDEFB', '#80CBC4', '#CCFF90', '#FFD180'];
+    return color[i];
+  }
+
+  gradientFill() {
+    let gradientFill = this.ctx.createLinearGradient(0, 0, 0, 500);
+    gradientFill.addColorStop(0, "rgba(255, 202, 40, 0.6)");
+    gradientFill.addColorStop(1, "rgba(255, 202, 250, 0)");
+    return gradientFill;
   }
 
   createChart() {
@@ -276,7 +294,6 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         onComplete: function () {
           let chartInstance = this.chart,
             ctx = chartInstance.ctx;
-
           ctx.textAlign = 'center';
           ctx.textBaseline = 'bottom';
           ctx.fillStyle = 'rgba(0, 0, 0, 0.87)';
@@ -298,7 +315,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       tooltips: {
         mode: 'x',
         intersect: true
-      }
+      },
     };
 
     this.myChart = new Chart(this.ctx, {
@@ -317,12 +334,12 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     this.myChart.update();
   }
 
-  drawDataTable(array) {
-    let ELEMENT_DATA: Element[] = array.map(item => {
+  drawDataTable() {
+    this.ELEMENT_DATA = this.dailyData.map(item => {
       return { day: item.name, ...item.unit };
     });
-
-    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+    console.log(this.ELEMENT_DATA)
+    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   }
 
 }
