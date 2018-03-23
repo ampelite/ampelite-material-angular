@@ -42,7 +42,8 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   private groupUnitModel: GroupUnitModel[] = [];
   private selectedGroupReport: string;
   private selectedGroupUnit: string;
-  private selectedDate: Date;
+  private selectedDate: Date = new Date();
+  private selectedWeek: number;
 
   private dailyData: any[] = [];
 
@@ -57,7 +58,6 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   // private date = (new Date()).toISOString();
   // private groupCode: string;
   // private unit: string;
-  private lastDays: number = 31;
 
   // Data table
   private ELEMENT_DATA: Element[];
@@ -81,12 +81,36 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
   openDialog() {
     this._dialogService
-      .searching(this.groupReportModel, this.groupUnitModel, 'fibre', '1m', new Date())
+      .searching(this.groupReportModel, this.groupUnitModel, this.selectedGroupReport, this.selectedGroupUnit, this.selectedDate, this.selectedWeek)
       .subscribe(res => {
-        this.selectedDate = res['selectedDate'].toISOString();
+        if (res == undefined) {
+          return false;
+        }
+
+        this.groupUnitModel = res['groupUnit'];
+        this.selectedDate = res['selectedDate'];
         this.selectedGroupReport = res['selectedGroupReport'];
         this.selectedGroupUnit = res['selectedGroupUnit'];
-        this.titleChart = 'Group ${}';
+        this.selectedWeek = res["selectedWeek"];
+        debugger
+
+        const unit = this.groupUnitModel.filter(p => { return p.unitCode == this.selectedGroupUnit })
+        this.titleChart = `Group ${unit[0].unitTitle}`;
+
+        // get Graph product service
+        this._dailypoService
+          .getGraphProduct(this.selectedDate.toISOString(), this.selectedGroupReport, this.selectedGroupUnit)
+          .subscribe(res => {
+            this.dailyData = res.body;
+            this.setData();
+            this.updateChart();
+            this.drawDataTable();
+
+            setTimeout(() => {
+              this.loading = true;
+            }, 800)
+
+          }, error => console.error(error));
       });
   }
 
@@ -97,22 +121,22 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     this._componentPageTitle.title = 'Po. daily report';
 
     if (this.isXSmallScreen.matches) {
-      this.lastDays = 6;
+      this.selectedWeek = 7;
       this.barChart.nativeElement.height = 80;
     }
 
     if (this.isSmallScreen.matches) {
-      this.lastDays = 13;
+      this.selectedWeek = 14;
       this.barChart.nativeElement.height = 50;
     }
 
     if (this.isMediumScreen.matches) {
-      this.lastDays = 31;
+      this.selectedWeek = 21;
       this.barChart.nativeElement.height = 35;
     }
 
     if (this.isLargeScreen.matches) {
-      this.lastDays = 31;
+      this.selectedWeek = 31;
       this.barChart.nativeElement.height = 30;
     }
 
@@ -130,15 +154,18 @@ export class PoDailyComponent implements OnInit, OnDestroy {
             this.selectedGroupUnit = this.groupUnitModel[0].unitCode;
 
             // get Graph product service
-            this._dailypoService.getGraphProduct(this.selectedDate.toISOString(), this.selectedGroupReport, this.selectedGroupUnit)
+            this._dailypoService
+              .getGraphProduct(this.selectedDate.toISOString(), this.selectedGroupReport, this.selectedGroupUnit)
               .subscribe(res => {
                 this.dailyData = res.body;
-                // if (this.isScreenSmall()) {
-                // this.lastDays = 7;
-                // }
+
+                const unit = this.groupUnitModel.filter(p => { return p.unitCode == this.selectedGroupUnit })
+                this.titleChart = `Group ${unit[0].unitTitle}`;
+
                 this.setData();
                 this.createChart();
                 this.drawDataTable();
+
                 setTimeout(() => {
                   this.loading = true;
                 }, 800)
@@ -162,10 +189,11 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     this.label = [];
     this.displayedColumns = ['day'];
 
-    let dateNow = this.selectedDate;
-    let lastDate = this.selectedDate;
-    lastDate.setDate(lastDate.getDate() - this.lastDays);
-    let firstDate = ((lastDate.getMonth() + 1) < (dateNow.getMonth() + 1)) ? 1 : lastDate.getDate();
+    const dateNow = new Date(this.selectedDate);
+    const lastDate = new Date(this.selectedDate);
+    const lastDays = (this.selectedWeek - 1)
+    lastDate.setDate(lastDate.getDate() - lastDays);
+    const firstDate = ((lastDate.getMonth() + 1) < (dateNow.getMonth() + 1)) ? 1 : lastDate.getDate();
 
     for (let i = firstDate; i <= dateNow.getDate(); i++) {
       this.label.push(i);
@@ -183,16 +211,16 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         data: e.unit.slice(firstDate - 1), // -1 เพื่อเปลี่ยนวันที่ให้เป็นตำแหน่ง index
         type: 'line',
         borderWidth: 3,
-        pointStyle: 'rectRot',
+        // pointStyle: 'rectRot',
         borderColor: "rgb(255, 99, 132)",
-        pointBorderColor: "rgba(255, 99, 132, 0.6)",
-        pointBackgroundColor: "rgba(255, 255, 255, 0.6)",
-        pointHoverBackgroundColor: "rgba(255, 99, 132, 0.6)",
-        pointHoverBorderColor: "rgba(255, 99, 132, 0.6)",
-        pointBorderWidth: 8,
-        pointHoverRadius: 8,
-        pointHoverBorderWidth: 1,
-        pointRadius: 3,
+        pointBorderColor: "rgba(255, 255, 255, 1)",
+        pointBackgroundColor: "rgba(255, 99, 132, 1)",
+        pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
+        pointHoverBorderColor: "rgba(255, 99, 132, 1)",
+        pointBorderWidth: 2,
+        pointHoverRadius: 6,
+        pointHoverBorderWidth: 2,
+        pointRadius: 5,
         fill: true,
         backgroundColor: "rgba(255, 99, 132, 0)",
       })
@@ -207,14 +235,14 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         lineTension: 0,
         borderWidth: 3,
         borderColor: "rgb(255, 202, 40)",
-        pointBorderColor: "rgba(255, 202, 40, 0.6)",
-        pointBackgroundColor: "rgba(255, 255, 255, 0.6)",
-        pointHoverBackgroundColor: "rgba(255, 202, 40, 0.6)",
-        pointHoverBorderColor: "rgba(255, 202, 40, 0.6)",
-        pointBorderWidth: 8,
-        pointHoverRadius: 8,
-        pointHoverBorderWidth: 1,
-        pointRadius: 3,
+        pointBorderColor: "rgba(255, 255, 255, 1)",
+        pointBackgroundColor: "rgba(255, 202, 40, 1)",
+        pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
+        pointHoverBorderColor: "rgba(255, 202, 40, 1)",
+        pointBorderWidth: 2,
+        pointHoverRadius: 6,
+        pointHoverBorderWidth: 2,
+        pointRadius: 5,
         fill: true,
         backgroundColor: this.gradientFill(),
       });
@@ -232,6 +260,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         borderWidth: 1
       });
     })
+
   }
 
   colors(i: number) {
@@ -240,10 +269,12 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   }
 
   gradientFill() {
-    let gradientFill = this.ctx.createLinearGradient(0, 0, 0, 500);
-    gradientFill.addColorStop(0, "rgba(255, 202, 40, 0.6)");
-    gradientFill.addColorStop(1, "rgba(255, 202, 250, 0)");
+    let gradientFill = this.ctx.createLinearGradient(0, 0, 0, 450);
+    gradientFill.addColorStop(0, "rgba(255, 202, 40, 0.5)");
+    gradientFill.addColorStop(1, "rgba(197, 32, 186, 0.4)");
     return gradientFill;
+    // #c520ba
+    //#ffae28
   }
 
   createChart() {
@@ -264,12 +295,9 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         yAxes: [
           {
             stacked: true,
-
             gridLines: {
               drawTicks: true,
               zeroLineColor: "#fff"
-              // drawOnChartArea: false,              
-              // color: white,
             },
             ticks: {
               fontColor: "#fff",
@@ -303,14 +331,17 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         display: true,
         fontColor: "#fff",
         labels: {
-          fontColor: "#fff"
+          fontColor: "#fff",
+          usePointStyle: true
         }
         // position: 'bottom',
       },
       title: {
         display: true,
-        text: 'Custom Chart Title',
+        text: this.titleChart,
         fontColor: "#fff",
+        fontFamily: "Roboto",
+        fontSize: 14
       },
       tooltips: {
         mode: 'x',
@@ -326,11 +357,13 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       },
       options: options,
     });
+
   }
 
   updateChart() {
     this.myChart.data.datasets = this.dataSet;
     this.myChart.data.labels = this.label;
+    this.myChart.options.title.text = this.titleChart;
     this.myChart.update();
   }
 
@@ -338,7 +371,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     this.ELEMENT_DATA = this.dailyData.map(item => {
       return { day: item.name, ...item.unit };
     });
-    console.log(this.ELEMENT_DATA)
+
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   }
 

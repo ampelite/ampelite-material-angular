@@ -24,7 +24,8 @@ export class DialogService {
     GroupUnitModel: GroupUnitModel[],
     selectedGroupReport: string,
     selectedGroupUnit: string,
-    selectedDate: Date): Observable<any[]> {
+    selectedDate: Date,
+    selectedWeek: number): Observable<boolean> {
 
     let dialogRef: MatDialogRef<SearchDailyDialogComponent>;
 
@@ -34,9 +35,10 @@ export class DialogService {
       data: {
         groupReport: GroupReportModel,
         groupUnit: GroupUnitModel,
-        selectedGroupReport,
-        selectedGroupUnit,
-        selectedDate
+        selectedGroupReport: selectedGroupReport,
+        selectedGroupUnit: selectedGroupUnit,
+        selectedDate: selectedDate,
+        selectedWeek: selectedWeek.toString()
       }
     });
 

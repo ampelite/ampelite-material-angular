@@ -24,6 +24,7 @@ export class SearchDailyDialogComponent {
   public date: Date;
   public selectedGroupReport: string;
   public selectedGroupUnit: string;
+  public selectedWeek: number;
   public groupReport: GroupReportModel[];
   public groupUnit: GroupUnitModel[];
 
@@ -33,14 +34,15 @@ export class SearchDailyDialogComponent {
     private GroupUnitService: GroupUnitService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  //  groupReportChange() {
-  //   let groupCode = this.data.selectedGroupReport;
-  //   this.GroupUnitService.getByGroupCode(groupCode)
-  //     .subscribe(res => {
-  //       this.groupUnit = res;
-  //       this.data.groupUnit = res;
-  //       this.data.selectedGroupUnit = res[0].unitCode;
-  //     })
-  // }
+   groupReportChange() {
+    let groupCode = this.data.selectedGroupReport;
+    this.GroupUnitService.getByGroupCode(groupCode)
+      .subscribe(res => {
+
+        // this.groupUnit = res;
+        this.data.groupUnit = res;
+        this.data.selectedGroupUnit = res[0].unitCode;
+      })
+  }
 
 }

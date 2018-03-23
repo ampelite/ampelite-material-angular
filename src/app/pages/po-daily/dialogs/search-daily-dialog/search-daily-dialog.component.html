@@ -18,6 +18,14 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field>
+    <mat-select #week  placeholder="Choose a week" [(value)]="data.selectedWeek">
+      <mat-option value="7">One week</mat-option>
+      <mat-option value="14">Two weeks</mat-option>
+      <mat-option value="21">Three weeks</mat-option>
+      <mat-option value="31">Four weeks</mat-option>
+    </mat-select>
+  </mat-form-field>
   <!-- <button type="button" mat-raised-button (click)="dialogRef.close(true)">OK</button>
   <button type="button" mat-button (click)="dialogRef.close()">Cancel</button> -->
 </div>

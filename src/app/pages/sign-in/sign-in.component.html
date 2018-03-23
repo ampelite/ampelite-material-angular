@@ -4,38 +4,39 @@
       <h1 class="mat-h1">Ampelite</h1>
       <h2> Makes light work!</h2>
     </div>
-    <!-- <div class="docs-header-start ">
-    </div> -->
+    <div class="docs-header-start ">
+      <div class="content">
+        <mat-card class="card">
+          <div *ngIf="loader">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+
+          <mat-card-header>
+            <mat-card-title>
+              <h2>Sign In</h2>
+            </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <!-- f.form.valid && -->
+            <form class="form" name="form" (ngSubmit)="signin()" #f="ngForm" novalidate>
+              <div class="container">
+                <mat-form-field>
+                  <input matInput placeholder="User name" name="username" [(ngModel)]="model.username" #username="ngModel" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input matInput placeholder="Enter your password" type="password" name="password" [(ngModel)]="model.password" #password="ngModel"
+                    required>
+                </mat-form-field>
+              </div>
+            </form>
+          </mat-card-content>
+          <mat-card-actions class="text-right">
+            <button mat-raised-button color="primary" type="submit" (click)="submit()">Sign In</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
   </div>
 </header>
-<div class="content">
-  <mat-card class="card">
-    <div *ngIf="loader">
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
-
-    <mat-card-header>
-      <mat-card-title>
-        <h2>Sign In</h2>
-      </mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-      <form class="form" name="form" (ngSubmit)="f.form.valid && signin()" #f="ngForm" novalidate>
-        <div class="container">
-          <mat-form-field>
-            <input matInput placeholder="User name" name="username" [(ngModel)]="model.username" #username="ngModel" required>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput placeholder="Enter your password" type="password" name="password" [(ngModel)]="model.password" #password="ngModel"
-              required>
-          </mat-form-field>
-        </div>
-      </form>
-    </mat-card-content>
-    <mat-card-actions class="text-right">
-      <button mat-raised-button color="primary" (click)="submit()">Sign In</button>
-    </mat-card-actions>
-  </mat-card>
-</div>

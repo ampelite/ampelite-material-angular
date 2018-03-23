@@ -1,6 +1,13 @@
 
 @import '../homepage/homepage.component';
 
+header {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: scroll !important;
+}
+
 $card-width: 400px;
 $card-margin: auto;
 
