@@ -1,0 +1,73 @@
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="DocuDate">
+      <mat-header-cell *matHeaderCellDef> DocuDate </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.DocuDate}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="DocuNo">
+      <mat-header-cell *matHeaderCellDef> DocuNo </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.DocuNo}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="CustPONo">
+      <mat-header-cell *matHeaderCellDef> CustPONo </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.CustPONo}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="JobName">
+      <mat-header-cell *matHeaderCellDef> JobName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.JobName}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="CustName">
+      <mat-header-cell *matHeaderCellDef> CustName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.CustName}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="GoodName">
+      <mat-header-cell *matHeaderCellDef> GoodName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.GoodName}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="GoodQty2">
+      <mat-header-cell *matHeaderCellDef> GoodQty2 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.GoodQty2}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="GoodPrice2">
+      <mat-header-cell *matHeaderCellDef> GoodPrice2 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.GoodPrice2}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="GoodAmnt">
+      <mat-header-cell *matHeaderCellDef> GoodAmnt </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.GoodAmnt}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="EmpName">
+      <mat-header-cell *matHeaderCellDef> EmpName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.EmpName}} </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

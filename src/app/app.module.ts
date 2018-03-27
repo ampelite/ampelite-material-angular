@@ -21,7 +21,6 @@ import { PageHeaderComponent } from './pages/page-header/page-header.component';
 import { PageFooterComponent } from './pages/page-footer/page-footer.component';
 import { PageViewerComponent } from './pages/page-viewer/page-viewer.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { PoDailyComponent } from './pages/po-daily/po-daily.component';
 import { MarketingReportComponent } from './pages/marketing-report/marketing-report.component';
 
 import {
@@ -32,14 +31,10 @@ import {
   GroupUnitService
 } from './services/index';
 import { SalePromotionComponent } from './pages/sale-promotion/sale-promotion.component';
-import { DialogModule  } from './pages/po-daily/dialogs/dialog.module';
-import { ProductDailyTableComponent } from './pages/po-daily/tables/product-daily-table/product-daily-table.component';
+import { PoDailyModule } from './pages/po-daily/po-daily.module';
 
 @NgModule({
-  entryComponents: [
-    PoDailyComponent,
-    // PoDailyOverviewDialog
-  ],
+  entryComponents: [],
   declarations: [
     AppComponent,
     CategoryListComponent,
@@ -49,11 +44,9 @@ import { ProductDailyTableComponent } from './pages/po-daily/tables/product-dail
     PageHeaderComponent,
     PageViewerComponent,
     SignInComponent,
-    PoDailyComponent,
     MarketingReportComponent,
     PageFooterComponent,
     SalePromotionComponent,
-    ProductDailyTableComponent
   ],
   imports: [
     MaterialModule,
@@ -64,7 +57,7 @@ import { ProductDailyTableComponent } from './pages/po-daily/tables/product-dail
     HttpModule,
     HttpClientModule,
     AppRoutingModule,
-    DialogModule
+    PoDailyModule
   ],
   providers: [
     AuthGuard,

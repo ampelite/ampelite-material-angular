@@ -55,9 +55,6 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   private dataSet = [];
   private options: any;
   private titleChart: string;
-  // private date = (new Date()).toISOString();
-  // private groupCode: string;
-  // private unit: string;
 
   // Data table
   private ELEMENT_DATA: Element[];
@@ -72,12 +69,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
     private _dailypoGroupUnitService: GroupUnitService,
     private _dialogService: DialogService,
     zone: NgZone,
-    // private breakpointObserver: BreakpointObserver
-  ) {
-    // this.isXSmallScreen.addListener(mql => zone.run(() => this.isXSmallScreen = mql));
-    // this.isSmallScreen.addListener(mql => zone.run(() => this.isXSmallScreen = mql));
-    // this.isMediumScreen.addListener(mql => zone.run(() => this.isXSmallScreen = mql));
-  }
+  ) { }
 
   openDialog() {
     this._dialogService
@@ -92,7 +84,6 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         this.selectedGroupReport = res['selectedGroupReport'];
         this.selectedGroupUnit = res['selectedGroupUnit'];
         this.selectedWeek = res["selectedWeek"];
-        debugger
 
         const unit = this.groupUnitModel.filter(p => { return p.unitCode == this.selectedGroupUnit })
         this.titleChart = `Group ${unit[0].unitTitle}`;
@@ -269,12 +260,10 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   }
 
   gradientFill() {
-    let gradientFill = this.ctx.createLinearGradient(0, 0, 0, 450);
-    gradientFill.addColorStop(0, "rgba(255, 202, 40, 0.5)");
+    let gradientFill = this.ctx.createLinearGradient(0, 0, 0, 600);
+    gradientFill.addColorStop(0, "rgba(255, 202, 40, 0.4)");
     gradientFill.addColorStop(1, "rgba(197, 32, 186, 0.4)");
     return gradientFill;
-    // #c520ba
-    //#ffae28
   }
 
   createChart() {

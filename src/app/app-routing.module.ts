@@ -6,7 +6,7 @@ import { CategoryListComponent } from './pages/category-list/category-list.compo
 import { SidenavComponent } from './pages/sidenav/sidenav.component';
 import { PageViewerComponent } from './pages/page-viewer/page-viewer.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { PoDailyComponent } from './pages/po-daily/po-daily.component';
+import { PoDailyComponent, DetailDailyComponent } from './pages/po-daily/';
 import { MarketingReportComponent } from './pages/marketing-report/marketing-report.component';
 import { SalePromotionComponent } from './pages/sale-promotion/sale-promotion.component';
 import { AuthGuard } from './guards';
@@ -34,6 +34,7 @@ const routes: Routes = [
         path: 'po-daily',
         children: [
           { path: '', component: PoDailyComponent, canActivate: [AuthGuard] },
+          { path: 'detail-daily', component: DetailDailyComponent, canActivate: [AuthGuard] },
         ],
       },
       {
