@@ -5,4 +5,8 @@ export class DetailDailyService {
 
   constructor() { }
 
+  public searchingDetailDaily() {
+    
+  }
+
 }

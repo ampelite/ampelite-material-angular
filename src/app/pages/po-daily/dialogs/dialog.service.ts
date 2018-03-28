@@ -7,16 +7,12 @@ import { FormControl } from '@angular/forms';
 import { SearchDailyDialogComponent } from './search-daily-dialog/search-daily-dialog.component';
 // Models
 import { GroupReport as GroupReportModel, GroupUnit as GroupUnitModel } from '../../../models';
-// Services 
-import { GroupReportService, GroupUnitService } from '../../../services';
 
 @Injectable()
 export class DialogService {
 
   constructor(
-    private dialog: MatDialog,
-    public GroupReportService: GroupReportService,
-    public GroupUnitService: GroupUnitService
+    private dialog: MatDialog
   ) { }
 
   public searching(

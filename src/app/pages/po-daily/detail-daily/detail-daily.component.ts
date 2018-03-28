@@ -2,12 +2,18 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ComponentPageTitle } from '../../page-title';
 
+// import {} from '../../../services/daily-po/'
+
 @Component({
   selector: 'app-detail-daily',
   templateUrl: './detail-daily.component.html',
   styleUrls: ['./detail-daily.component.scss']
 })
 export class DetailDailyComponent implements OnInit {
+
+  public groupCode: string;
+  public teamName: string;
+  public sDate: Date;
 
   constructor(
     public _componentPageTitle: ComponentPageTitle
