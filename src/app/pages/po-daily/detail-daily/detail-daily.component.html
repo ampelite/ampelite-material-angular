@@ -1,3 +1,7 @@
+<div *ngIf="loading == false;" class="warpper">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
 <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource">
 
@@ -38,9 +42,9 @@
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="GoodQty2">
-      <mat-header-cell *matHeaderCellDef> GoodQty2 </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.GoodQty2}} </mat-cell>
+    <ng-container matColumnDef="GoodQty">
+      <mat-header-cell *matHeaderCellDef> GoodQty </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.GoodQty}} </mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->

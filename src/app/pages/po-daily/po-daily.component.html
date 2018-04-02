@@ -1,189 +1,403 @@
-
 <div *ngIf="loading == false;" class="warpper">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
-  <div class="bar-chart">
-    <div class="toolbar">
-      <button mat-mini-fab (click)="openDialog()">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      {{result}}
-    </div>
-    <canvas #barchart width="100%"></canvas>
+<div class="bar-chart">
+  <div class="toolbar">
+    <button mat-mini-fab (click)="openDialog()">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    {{result}}
   </div>
+  <canvas #barchart width="100%"></canvas>
+</div>
 
-  <div class="table-content mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource">
+<div class="table-content mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="day">
-        <mat-header-cell *matHeaderCellDef> Day </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.day}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="day">
+      <mat-header-cell *matHeaderCellDef> Day </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.day}} </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="0">
-        <mat-header-cell *matHeaderCellDef> 1 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[0]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="0">
+      <mat-header-cell *matHeaderCellDef> 1 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:1, date: selectedDate}">
+          {{element[0]}}
+        </a>
+        <ng-template #elseBlock>{{element[0]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="1">
-        <mat-header-cell *matHeaderCellDef> 2 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[1]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="1">
+      <mat-header-cell *matHeaderCellDef> 2 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:2, date: selectedDate}">
+          {{element[1]}}
+        </a>
+        <ng-template #elseBlock>{{element[1]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="2">
-        <mat-header-cell *matHeaderCellDef> 3 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="2">
+      <mat-header-cell *matHeaderCellDef> 3 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:3, date: selectedDate}">
+          {{element[2]}}
+        </a>
+        <ng-template #elseBlock>{{element[2]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="3">
-        <mat-header-cell *matHeaderCellDef> 4 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="3">
+      <mat-header-cell *matHeaderCellDef> 4 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:4, date: selectedDate}">
+          {{element[3]}}
+        </a>
+        <ng-template #elseBlock>{{element[3]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="4">
-        <mat-header-cell *matHeaderCellDef> 5 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="4">
+      <mat-header-cell *matHeaderCellDef> 5 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:5, date: selectedDate}">
+          {{element[4]}}
+        </a>
+        <ng-template #elseBlock>{{element[4]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="5">
-        <mat-header-cell *matHeaderCellDef> 6 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[5]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="5">
+      <mat-header-cell *matHeaderCellDef> 6 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:6, date: selectedDate}">
+          {{element[5]}}
+        </a>
+        <ng-template #elseBlock>{{element[5]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="6">
-        <mat-header-cell *matHeaderCellDef> 7 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[6]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="6">
+      <mat-header-cell *matHeaderCellDef> 7 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:7, date: selectedDate}">
+          {{element[6]}}
+        </a>
+        <ng-template #elseBlock>{{element[6]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="7">
-        <mat-header-cell *matHeaderCellDef> 8 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[7]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="7">
+      <mat-header-cell *matHeaderCellDef> 8 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:8, date: selectedDate}">
+          {{element[7]}}
+        </a>
+        <ng-template #elseBlock>{{element[7]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="8">
-        <mat-header-cell *matHeaderCellDef> 9 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[8]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="8">
+      <mat-header-cell *matHeaderCellDef> 9 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:9, date: selectedDate}">
+          {{element[8]}}
+        </a>
+        <ng-template #elseBlock>{{element[8]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="9">
-        <mat-header-cell *matHeaderCellDef> 10 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[9]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="9">
+      <mat-header-cell *matHeaderCellDef> 10 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:10, date: selectedDate}">
+          {{element[9]}}
+        </a>
+        <ng-template #elseBlock>{{element[9]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="10">
-        <mat-header-cell *matHeaderCellDef> 11 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[10]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="10">
+      <mat-header-cell *matHeaderCellDef> 11 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:11, date: selectedDate}">
+          {{element[10]}}
+        </a>
+        <ng-template #elseBlock>{{element[10]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="11">
-        <mat-header-cell *matHeaderCellDef> 12 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[11]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="11">
+      <mat-header-cell *matHeaderCellDef> 12 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:12, date: selectedDate}">
+          {{element[11]}}
+        </a>
+        <ng-template #elseBlock>{{element[11]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="12">
-        <mat-header-cell *matHeaderCellDef> 13 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[12]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="12">
+      <mat-header-cell *matHeaderCellDef> 13 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:13, date: selectedDate}">
+          {{element[12]}}
+        </a>
+        <ng-template #elseBlock>{{element[12]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="13">
-        <mat-header-cell *matHeaderCellDef> 14 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[13]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="13">
+      <mat-header-cell *matHeaderCellDef> 14 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:14, date: selectedDate}">
+          {{element[13]}}
+        </a>
+        <ng-template #elseBlock>{{element[13]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="14">
-        <mat-header-cell *matHeaderCellDef> 15 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[14]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="14">
+      <mat-header-cell *matHeaderCellDef> 15 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:15, date: selectedDate}">
+          {{element[14]}}
+        </a>
+        <ng-template #elseBlock>{{element[14]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="15">
-        <mat-header-cell *matHeaderCellDef> 16 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[15]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="15">
+      <mat-header-cell *matHeaderCellDef> 16 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:16, date: selectedDate}">
+          {{element[15]}}
+        </a>
+        <ng-template #elseBlock>{{element[15]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="16">
-        <mat-header-cell *matHeaderCellDef> 17 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[16]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="16">
+      <mat-header-cell *matHeaderCellDef> 17 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:17, date: selectedDate}">
+          {{element[16]}}
+        </a>
+        <ng-template #elseBlock>{{element[16]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="17">
-        <mat-header-cell *matHeaderCellDef> 18 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[17]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="17">
+      <mat-header-cell *matHeaderCellDef> 18 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:18, date: selectedDate}">
+          {{element[17]}}
+        </a>
+        <ng-template #elseBlock>{{element[17]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="18">
-        <mat-header-cell *matHeaderCellDef> 19 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[18]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="18">
+      <mat-header-cell *matHeaderCellDef> 19 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:19, date: selectedDate}">
+          {{element[18]}}
+        </a>
+        <ng-template #elseBlock>{{element[18]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="19">
-        <mat-header-cell *matHeaderCellDef> 20 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[19]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="19">
+      <mat-header-cell *matHeaderCellDef> 20 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:20, date: selectedDate}">
+          {{element[19]}}
+        </a>
+        <ng-template #elseBlock>{{element[19]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="20">
-        <mat-header-cell *matHeaderCellDef> 21 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[20]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="20">
+      <mat-header-cell *matHeaderCellDef> 21 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:21, date: selectedDate}">
+          {{element[20]}}
+        </a>
+        <ng-template #elseBlock>{{element[20]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="21">
-        <mat-header-cell *matHeaderCellDef> 22 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[21]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="21">
+      <mat-header-cell *matHeaderCellDef> 22 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:22, date: selectedDate}">
+          {{element[21]}}
+        </a>
+        <ng-template #elseBlock>{{element[21]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="22">
-        <mat-header-cell *matHeaderCellDef> 23 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[22]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="22">
+      <mat-header-cell *matHeaderCellDef> 23 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:23, date: selectedDate}">
+          {{element[22]}}
+        </a>
+        <ng-template #elseBlock>{{element[22]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="23">
-        <mat-header-cell *matHeaderCellDef> 24 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[23]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="23">
+      <mat-header-cell *matHeaderCellDef> 24 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:24, date: selectedDate}">
+          {{element[23]}}
+        </a>
+        <ng-template #elseBlock>{{element[23]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="24">
-        <mat-header-cell *matHeaderCellDef> 25 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[24]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="24">
+      <mat-header-cell *matHeaderCellDef> 25 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:25, date: selectedDate}">
+          {{element[24]}}
+        </a>
+        <ng-template #elseBlock>{{element[24]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="25">
-        <mat-header-cell *matHeaderCellDef> 26 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[25]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="25">
+      <mat-header-cell *matHeaderCellDef> 26 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:26, date: selectedDate}">
+          {{element[25]}}
+        </a>
+        <ng-template #elseBlock>{{element[25]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="26">
-        <mat-header-cell *matHeaderCellDef> 27 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[26]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="26">
+      <mat-header-cell *matHeaderCellDef> 27 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:27, date: selectedDate}">
+          {{element[26]}}
+        </a>
+        <ng-template #elseBlock>{{element[26]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="27">
-        <mat-header-cell *matHeaderCellDef> 28 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[27]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="27">
+      <mat-header-cell *matHeaderCellDef> 28 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:28, date: selectedDate}">
+          {{element[27]}}
+        </a>
+        <ng-template #elseBlock>{{element[27]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="28">
-        <mat-header-cell *matHeaderCellDef> 29 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[28]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="28">
+      <mat-header-cell *matHeaderCellDef> 29 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:29, date: selectedDate}">
+          {{element[28]}}
+        </a>
+        <ng-template #elseBlock>{{element[28]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="29">
-        <mat-header-cell *matHeaderCellDef> 30 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[29]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="29">
+      <mat-header-cell *matHeaderCellDef> 30 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:30, date: selectedDate}">
+          {{element[29]}}
+        </a>
+        <ng-template #elseBlock>{{element[29]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="30">
-        <mat-header-cell *matHeaderCellDef> 31 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[30]}} </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="30">
+      <mat-header-cell *matHeaderCellDef> 31 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="element.type == 'product'; else elseBlock" 
+          [routerLink]="['detail-daily']" 
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:31, date: selectedDate}">
+          {{element[30]}}
+        </a>
+        <ng-template #elseBlock>{{element[30]}}</ng-template>
+      </mat-cell>
+    </ng-container>
 
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </div>
+  </mat-table>
 
-
+</div>
 
 <!-- <div class="setting-component">
   <button mat-mini-fab color="warn">

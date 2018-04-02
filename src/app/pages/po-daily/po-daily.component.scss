@@ -37,15 +37,19 @@
     max-height: 500px;
 
     .mat-header-row{
-        min-height: 40px;
+        min-height: 48px;
     }
 
     .mat-row{
-        min-height: 30px; 
+        min-height: 40px; 
     }
 
     .mat-cell {
-        font-size: 12px;
+        // font-size: 13px;
+
+        a {
+            text-decoration: none;
+        }
     }
 
     .mat-column-day {

@@ -37,7 +37,7 @@ export class SidenavComponent implements OnInit {
         this.sidenav.close();
       }
     });
-
+    
     // Combine params from all of the path into a single object.
     this.params = combineLatest(
       this._route.pathFromRoot.map(route => route.params),

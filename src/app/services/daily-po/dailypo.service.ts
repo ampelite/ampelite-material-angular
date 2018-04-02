@@ -12,7 +12,7 @@ export class DailypoService {
   constructor(private http: HttpClient) { }
 
   getGraphProduct(Date: string, GroupCode: string, Unit: string) {
-    const apiURL = `${appConfig.apiUrl}/api/GraphProduct`;
+    const apiURL = `${appConfig.apiUrl}/api/Dailypo/Graph`;
     const params = { Date, GroupCode, Unit };
     return this.http.get<any>(apiURL, { params, observe: 'response' })
   }

@@ -27,6 +27,7 @@ import {
   AuthenticationService,
   UserService,
   DailypoService,
+  DailyDetailService,
   GroupReportService,
   GroupUnitService
 } from './services/index';
@@ -64,6 +65,7 @@ import { PoDailyModule } from './pages/po-daily/po-daily.module';
     AuthenticationService,
     UserService,
     DailypoService,
+    DailyDetailService,
     GroupReportService,
     GroupUnitService,
     ComponentPageTitle,

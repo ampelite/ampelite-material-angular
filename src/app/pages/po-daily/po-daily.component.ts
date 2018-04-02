@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, OnDestroy, ViewChild, ElementRef, Inject, NgModule, Output, NgZone } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Params, RouterModule } from '@angular/router';
+import { ActivatedRoute, Params, RouterModule, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatButtonModule, MatIconModule, MatTableDataSource, MatOption, MatDatepickerInputEvent } from '@angular/material';
 import { MatSelectModule, MatSelectChange } from '@angular/material/select';
 import { ComponentPageTitle } from '../../pages/page-title/page-title';
@@ -64,6 +64,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   constructor(
     public _componentPageTitle: ComponentPageTitle,
     private _route: ActivatedRoute,
+    private _router: Router,
     private _dailypoService: DailypoService,
     private _dailypoGroupReportService: GroupReportService,
     private _dailypoGroupUnitService: GroupUnitService,
@@ -78,7 +79,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         if (res == undefined) {
           return false;
         }
-
+debugger;
         this.groupUnitModel = res['groupUnit'];
         this.selectedDate = res['selectedDate'];
         this.selectedGroupReport = res['selectedGroupReport'];
@@ -104,6 +105,10 @@ export class PoDailyComponent implements OnInit, OnDestroy {
           }, error => console.error(error));
       });
   }
+
+  // open(){
+  //   this._router.navigate(['po-detail', {queryParames: {teamName: 'Ampelite Amperam'}}])
+  // }
 
   @ViewChild('barchart') barChart: ElementRef;
 
@@ -139,7 +144,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
         // get Group unit service
         this._dailypoGroupUnitService.getByGroupCode(this.selectedGroupReport)
-          .subscribe(res => {
+          .subscribe((res) => {
             this.groupUnitModel = res;
             this.selectedDate = new Date();
             this.selectedGroupUnit = this.groupUnitModel[0].unitCode;
@@ -358,7 +363,9 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
   drawDataTable() {
     this.ELEMENT_DATA = this.dailyData.map(item => {
-      return { day: item.name, ...item.unit };
+      return {
+        day: item.name, type: item.type, ...item.unit
+      };
     });
 
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
@@ -368,37 +375,39 @@ export class PoDailyComponent implements OnInit, OnDestroy {
 
 export interface Element {
   day: string;
-  0: number;
-  1: number;
-  2: number;
-  3: number;
-  4: number;
-  5: number;
-  6: number;
-  7: number;
-  8: number;
-  9: number;
-  10: number;
-  11: number;
-  12: number;
-  13: number;
-  14: number;
-  15: number;
-  16: number;
-  17: number;
-  18: number;
-  19: number;
-  20: number;
-  21: number;
-  22: number;
-  23: number;
-  24: number;
-  25: number;
-  26: number;
-  27: number;
-  28: number;
-  29: number;
-  30: number;
+  type: string;  
+  0: string;
+  1: string;
+  2: string;
+  3: string;
+  4: string;
+  5: string;
+  6: string;
+  7: string;
+  8: string;
+  9: string;
+  10: string;
+  11: string;
+  12: string;
+  13: string;
+  14: string;
+  15: string;
+  16: string;
+  17: string;
+  18: string;
+  19: string;
+  20: string;
+  21: string;
+  22: string;
+  23: string;
+  24: string;
+  25: string;
+  26: string;
+  27: string;
+  28: string;
+  29: string;
+  30: string;
+  31: string;
 }
 
 

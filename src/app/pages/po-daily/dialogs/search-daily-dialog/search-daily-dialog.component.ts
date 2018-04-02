@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, MatDatepicker, MatOption, MAT_DIALOG_DATA } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { FormControl } from '@angular/forms';
 import { MatSelectModule, MatSelectChange } from '@angular/material/select';
 import { map, filter } from 'rxjs/operators';
@@ -21,7 +22,7 @@ import { GroupReportService, GroupUnitService } from '../../../../services';
 })
 export class SearchDailyDialogComponent {
 
-  public date: Date;
+  public selectedDate: Date;
   public selectedGroupReport: string;
   public selectedGroupUnit: string;
   public selectedWeek: number;
@@ -34,7 +35,7 @@ export class SearchDailyDialogComponent {
     private GroupUnitService: GroupUnitService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-   groupReportChange() {
+  groupReportChange() {
     let groupCode = this.data.selectedGroupReport;
     this.GroupUnitService.getByGroupCode(groupCode)
       .subscribe(res => {
@@ -43,6 +44,10 @@ export class SearchDailyDialogComponent {
         this.data.groupUnit = res;
         this.data.selectedGroupUnit = res[0].unitCode;
       })
+  }
+
+  addEvent(event: MatDatepickerInputEvent<Date>) {
+    this.data.selectedDate = event.value;
   }
 
 }

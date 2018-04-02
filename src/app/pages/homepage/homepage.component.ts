@@ -7,7 +7,6 @@ import { ComponentPageTitle } from '../../pages/page-title/page-title';
 import { SECTIONS } from '../../shared/documentation-items/documentation-items';
 
 const SECTIONS_KEYS = Object.keys(SECTIONS);
-
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 // Modules
 import { MaterialModule } from '../../modules/material/material.module';
 // import { DialogModule } from './dialogs/dialog.module';
 
 // Services
-import { DetailDailyService } from './detail-daily/detail-daily.service';
 import { DialogService } from './dialogs/dialog.service';
 
 // Components
@@ -17,7 +17,8 @@ import { PoDailyComponent } from './po-daily.component';
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   declarations: [
     SearchDailyDialogComponent, 
@@ -33,6 +34,6 @@ import { PoDailyComponent } from './po-daily.component';
     SearchDailyDialogComponent, 
     DetailDailyComponent, 
   ],
-  providers:[DialogService, DetailDailyService]
+  providers:[DialogService]
 })
 export class PoDailyModule { }
