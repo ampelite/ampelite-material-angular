@@ -79,7 +79,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
         if (res == undefined) {
           return false;
         }
-debugger;
+
         this.groupUnitModel = res['groupUnit'];
         this.selectedDate = res['selectedDate'];
         this.selectedGroupReport = res['selectedGroupReport'];
@@ -362,6 +362,7 @@ debugger;
   }
 
   drawDataTable() {
+    console.log(this.dailyData);
     this.ELEMENT_DATA = this.dailyData.map(item => {
       return {
         day: item.name, type: item.type, ...item.unit
@@ -407,7 +408,6 @@ export interface Element {
   28: string;
   29: string;
   30: string;
-  31: string;
 }
 
 

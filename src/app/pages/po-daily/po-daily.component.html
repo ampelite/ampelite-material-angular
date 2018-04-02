@@ -25,7 +25,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:1, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:1, date: selectedDate.toISOString()}">
           {{element[0]}}
         </a>
         <ng-template #elseBlock>{{element[0]}}</ng-template>
@@ -37,7 +37,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:2, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:2, date: selectedDate.toISOString()}">
           {{element[1]}}
         </a>
         <ng-template #elseBlock>{{element[1]}}</ng-template>
@@ -49,7 +49,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:3, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:3, date: selectedDate.toISOString()}">
           {{element[2]}}
         </a>
         <ng-template #elseBlock>{{element[2]}}</ng-template>
@@ -61,7 +61,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:4, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:4, date: selectedDate.toISOString()}">
           {{element[3]}}
         </a>
         <ng-template #elseBlock>{{element[3]}}</ng-template>
@@ -73,7 +73,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:5, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:5, date: selectedDate.toISOString()}">
           {{element[4]}}
         </a>
         <ng-template #elseBlock>{{element[4]}}</ng-template>
@@ -85,7 +85,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:6, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:6, date: selectedDate.toISOString()}">
           {{element[5]}}
         </a>
         <ng-template #elseBlock>{{element[5]}}</ng-template>
@@ -97,7 +97,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:7, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:7, date: selectedDate.toISOString()}">
           {{element[6]}}
         </a>
         <ng-template #elseBlock>{{element[6]}}</ng-template>
@@ -109,7 +109,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:8, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:8, date: selectedDate.toISOString()}">
           {{element[7]}}
         </a>
         <ng-template #elseBlock>{{element[7]}}</ng-template>
@@ -121,7 +121,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:9, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:9, date: selectedDate.toISOString()}">
           {{element[8]}}
         </a>
         <ng-template #elseBlock>{{element[8]}}</ng-template>
@@ -133,7 +133,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:10, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:10, date: selectedDate.toISOString()}">
           {{element[9]}}
         </a>
         <ng-template #elseBlock>{{element[9]}}</ng-template>
@@ -145,7 +145,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:11, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:11, date: selectedDate.toISOString()}">
           {{element[10]}}
         </a>
         <ng-template #elseBlock>{{element[10]}}</ng-template>
@@ -157,7 +157,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:12, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:12, date: selectedDate.toISOString()}">
           {{element[11]}}
         </a>
         <ng-template #elseBlock>{{element[11]}}</ng-template>
@@ -169,7 +169,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:13, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:13, date: selectedDate.toISOString()}">
           {{element[12]}}
         </a>
         <ng-template #elseBlock>{{element[12]}}</ng-template>
@@ -181,7 +181,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:14, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:14, date: selectedDate.toISOString()}">
           {{element[13]}}
         </a>
         <ng-template #elseBlock>{{element[13]}}</ng-template>
@@ -193,7 +193,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:15, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:15, date: selectedDate.toISOString()}">
           {{element[14]}}
         </a>
         <ng-template #elseBlock>{{element[14]}}</ng-template>
@@ -205,7 +205,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:16, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:16, date: selectedDate.toISOString()}">
           {{element[15]}}
         </a>
         <ng-template #elseBlock>{{element[15]}}</ng-template>
@@ -217,7 +217,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:17, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:17, date: selectedDate.toISOString()}">
           {{element[16]}}
         </a>
         <ng-template #elseBlock>{{element[16]}}</ng-template>
@@ -229,7 +229,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:18, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:18, date: selectedDate.toISOString()}">
           {{element[17]}}
         </a>
         <ng-template #elseBlock>{{element[17]}}</ng-template>
@@ -241,7 +241,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:19, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:19, date: selectedDate.toISOString()}">
           {{element[18]}}
         </a>
         <ng-template #elseBlock>{{element[18]}}</ng-template>
@@ -253,7 +253,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:20, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:20, date: selectedDate.toISOString()}">
           {{element[19]}}
         </a>
         <ng-template #elseBlock>{{element[19]}}</ng-template>
@@ -265,7 +265,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:21, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:21, date: selectedDate.toISOString()}">
           {{element[20]}}
         </a>
         <ng-template #elseBlock>{{element[20]}}</ng-template>
@@ -277,7 +277,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:22, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:22, date: selectedDate.toISOString()}">
           {{element[21]}}
         </a>
         <ng-template #elseBlock>{{element[21]}}</ng-template>
@@ -289,7 +289,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:23, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:23, date: selectedDate.toISOString()}">
           {{element[22]}}
         </a>
         <ng-template #elseBlock>{{element[22]}}</ng-template>
@@ -301,7 +301,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:24, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:24, date: selectedDate.toISOString()}">
           {{element[23]}}
         </a>
         <ng-template #elseBlock>{{element[23]}}</ng-template>
@@ -313,7 +313,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:25, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:25, date: selectedDate.toISOString()}">
           {{element[24]}}
         </a>
         <ng-template #elseBlock>{{element[24]}}</ng-template>
@@ -325,7 +325,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:26, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:26, date: selectedDate.toISOString()}">
           {{element[25]}}
         </a>
         <ng-template #elseBlock>{{element[25]}}</ng-template>
@@ -337,7 +337,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:27, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:27, date: selectedDate.toISOString()}">
           {{element[26]}}
         </a>
         <ng-template #elseBlock>{{element[26]}}</ng-template>
@@ -349,7 +349,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:28, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:28, date: selectedDate.toISOString()}">
           {{element[27]}}
         </a>
         <ng-template #elseBlock>{{element[27]}}</ng-template>
@@ -361,7 +361,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:29, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:29, date: selectedDate.toISOString()}">
           {{element[28]}}
         </a>
         <ng-template #elseBlock>{{element[28]}}</ng-template>
@@ -373,7 +373,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:30, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:30, date: selectedDate.toISOString()}">
           {{element[29]}}
         </a>
         <ng-template #elseBlock>{{element[29]}}</ng-template>
@@ -385,7 +385,7 @@
       <mat-cell *matCellDef="let element">
         <a *ngIf="element.type == 'product'; else elseBlock" 
           [routerLink]="['detail-daily']" 
-          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:31, date: selectedDate}">
+          [queryParams]="{ groupCode: selectedGroupReport, teamName: element.day, sDate:31, date: selectedDate.toISOString()}">
           {{element[30]}}
         </a>
         <ng-template #elseBlock>{{element[30]}}</ng-template>
