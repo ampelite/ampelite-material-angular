@@ -362,7 +362,6 @@ export class PoDailyComponent implements OnInit, OnDestroy {
   }
 
   drawDataTable() {
-    console.log(this.dailyData);
     this.ELEMENT_DATA = this.dailyData.map(item => {
       return {
         day: item.name, type: item.type, ...item.unit

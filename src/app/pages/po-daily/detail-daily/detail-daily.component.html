@@ -64,14 +64,21 @@
       <mat-header-cell *matHeaderCellDef> EmpName </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.EmpName}} </mat-cell>
     </ng-container>
-    
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <mat-paginator #paginator
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 20]"
-                 [showFirstLastButtons]="true">
+  <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
   </mat-paginator>
+
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span class="example-spacer"></span>
+      <div class="total">
+        <span class="total-amount">{{ totalAmount }} ฿</span>
+        <cite class="total-qty">จำนวน {{totalQty}}</cite>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>

@@ -19,6 +19,8 @@ export class DetailDailyComponent implements OnInit {
   public sDate: Date;
 
   private TABLE_DETAIL: DetailDailyElement[];
+  private totalAmount: string;
+  private totalQty: string;
 
   constructor(
     public _componentPageTitle: ComponentPageTitle,
@@ -45,6 +47,10 @@ export class DetailDailyComponent implements OnInit {
 
         this._dailyDetail.getDetailDaily(param.groupCode, param.teamName, sDate.toISOString())
           .subscribe(res => {
+            let array = res.body
+            this.totalAmount = array.map(p => p.goodAmnt).reduce((accu, curr) => accu + curr);
+            this.totalQty = array.map(p => p.goodQty).reduce((accu, curr) => accu + curr);
+console.log(array)
             this.drawDataTable(res.body);
           });
       });
@@ -71,9 +77,9 @@ export class DetailDailyComponent implements OnInit {
       };
     });
 
-   this.dataSource =  new MatTableDataSource<DetailDailyElement>(this.TABLE_DETAIL);
-   this.dataSource.paginator = this.paginator;
-   this.loading = true;
+    this.dataSource = new MatTableDataSource<DetailDailyElement>(this.TABLE_DETAIL);
+    this.dataSource.paginator = this.paginator;
+    this.loading = true;
   }
 
 }
