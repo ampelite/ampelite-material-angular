@@ -7,10 +7,10 @@ import { MaterialModule } from '../../modules/material/material.module';
 // import { DialogModule } from './dialogs/dialog.module';
 
 // Services
-import { DialogService } from './dialogs/dialog.service';
+import { DialogService } from './dialogs';
 
 // Components
-import { SearchDailyDialogComponent } from './dialogs/search-daily-dialog/search-daily-dialog.component';
+import { SearchDailyDialogComponent, ReportsDialogComponent } from './dialogs';
 import { DetailDailyComponent } from './detail-daily/detail-daily.component';
 import { PoDailyComponent } from './po-daily.component';
 
@@ -23,7 +23,7 @@ import { PoDailyComponent } from './po-daily.component';
   declarations: [
     SearchDailyDialogComponent, 
     DetailDailyComponent, 
-    PoDailyComponent
+    PoDailyComponent, ReportsDialogComponent
   ],
   exports:[
     SearchDailyDialogComponent, 

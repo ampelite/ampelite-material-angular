@@ -50,7 +50,6 @@ export class DetailDailyComponent implements OnInit {
             let array = res.body
             this.totalAmount = array.map(p => p.goodAmnt).reduce((accu, curr) => accu + curr);
             this.totalQty = array.map(p => p.goodQty).reduce((accu, curr) => accu + curr);
-console.log(array)
             this.drawDataTable(res.body);
           });
       });
