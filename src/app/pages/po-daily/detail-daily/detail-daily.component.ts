@@ -22,8 +22,8 @@ export class DetailDailyComponent implements OnInit {
   public sDate: Date;
 
   private TABLE_DETAIL: DetailDailyElement[];
-  private totalAmount: string;
-  private totalQty: string;
+  private totalAmount: number;
+  private totalQty: number;
 
   private paramGroupCode: string;
   private paramTeamName: string;
