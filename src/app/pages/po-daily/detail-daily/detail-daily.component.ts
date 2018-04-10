@@ -54,7 +54,7 @@ export class DetailDailyComponent implements OnInit {
           return false;
         }
 
-        let param = `?GroupCode=${this.paramGroupCode}`;
+        let param = `/PoDaily/Index.aspx?GroupCode=${this.paramGroupCode}`;
 
         if (res['selectedRadio'] == 'by-customers-order') {
           param += `&TeamName=${this.paramTeamName}`
