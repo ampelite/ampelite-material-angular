@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 
 // Components
 import { SearchDailyDialogComponent } from './search-daily-dialog/search-daily-dialog.component';
+import { ReportsDialogComponent } from './reports-dialog/reports-dialog.component';
 // Models
 import { GroupReport as GroupReportModel, GroupUnit as GroupUnitModel } from '../../../models';
 
@@ -37,6 +38,22 @@ export class DialogService {
         selectedWeek: selectedWeek.toString()
       }
     });
+
+    return dialogRef.afterClosed();
+  }
+
+  public reporting(radioGroup: any[], selectedRadio: string, reportType: string) : Observable<string>{
+    let dialogRef: MatDialogRef<ReportsDialogComponent>;
+
+    dialogRef = this.dialog.open(ReportsDialogComponent, {
+      minWidth: '250px',
+      maxWidth: '350px',
+      data: {
+        radioGroup,
+        selectedRadio,
+        reportType
+      }
+    })
 
     return dialogRef.afterClosed();
   }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 // Modules
 import { MaterialModule } from '../../modules/material/material.module';
@@ -18,20 +19,24 @@ import { PoDailyComponent } from './po-daily.component';
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   declarations: [
     SearchDailyDialogComponent, 
     DetailDailyComponent, 
-    PoDailyComponent, ReportsDialogComponent
+    PoDailyComponent, 
+    ReportsDialogComponent
   ],
   exports:[
     SearchDailyDialogComponent, 
+    ReportsDialogComponent,
     DetailDailyComponent, 
     PoDailyComponent
   ],
   entryComponents:[
     SearchDailyDialogComponent, 
+    ReportsDialogComponent,
     DetailDailyComponent, 
   ],
   providers:[DialogService]

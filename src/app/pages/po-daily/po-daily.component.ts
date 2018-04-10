@@ -2,8 +2,8 @@ import { Component, EventEmitter, OnInit, OnDestroy, ViewChild, ElementRef, Inje
 import { FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params, RouterModule, Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatButtonModule, MatIconModule, MatTableDataSource, MatOption, MatDatepickerInputEvent } from '@angular/material';
-import { MatSelectModule, MatSelectChange } from '@angular/material/select';
+import { MatButtonModule, MatIconModule, MatTableDataSource } from '@angular/material';
+// import { MatSelectModule, MatSelectChange } from '@angular/material/select';
 import { ComponentPageTitle } from '../../pages/page-title/page-title';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
@@ -106,11 +106,7 @@ export class PoDailyComponent implements OnInit, OnDestroy {
       });
   }
 
-  // open(){
-  //   this._router.navigate(['po-detail', {queryParames: {teamName: 'Ampelite Amperam'}}])
-  // }
-
-  @ViewChild('barchart') barChart: ElementRef;
+    @ViewChild('barchart') barChart: ElementRef;
 
   ngOnInit() {
 

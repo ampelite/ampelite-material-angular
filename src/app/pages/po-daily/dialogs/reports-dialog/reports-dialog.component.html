@@ -1,26 +1,19 @@
-<!-- <div mat-dialog-content>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [value]="data.selectedDate"
-    (dateChange)="addEvent($event)">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select #groupReport placeholder="Choose a group" (change)="groupReportChange()" [(value)]="data.selectedGroupReport">
-      <mat-option *ngFor="let rpt of data.groupReport" [value]="rpt.groupCode">
-        {{ rpt.groupName }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select #groupUnit placeholder="Choose a unit" [(value)]="data.selectedGroupUnit">
-      <mat-option *ngFor="let unit of data.groupUnit" [value]="unit.unitCode">
-        {{ unit.unitValue }} {{ unit.unitName }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<div mat-dialog-content>
+  <mat-radio-group class="example-radio-group" [(ngModel)]="data.selectedRadio">
+    <mat-radio-button class="example-radio-button" *ngFor="let radio of data.radioGroup" [value]="radio.value">
+      {{radio.text}}</mat-radio-button>
+  </mat-radio-group>
 </div>
+<mat-divider></mat-divider>
 <div mat-dialog-actions>
-  <div class="flex-spacer"></div>
-  <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
-</div> -->
+  <button mat-raised-button class="green-800" (click)="exportPdf()" cdkFocusInitial>
+      <i class="material-icons">file_download</i>
+    PDF
+  </button>
+  <!-- <div class="flex-spacer"></div> -->
+  <button mat-raised-button class="red-500" (click)="exportExcel()" cdkFocusInitial>
+      <i class="material-icons">file_download</i>
+    Excel
+  </button>
+  <!-- <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button> -->
+</div>

@@ -6,6 +6,9 @@ import { map, filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
 import { DailyDetailService } from '../../../services/daily-po/daily-detail.service';
+import { DialogService } from '../dialogs/dialog.service';
+
+import { appConfig } from '../../../app.config';
 
 @Component({
   selector: 'app-detail-daily',
@@ -22,19 +25,59 @@ export class DetailDailyComponent implements OnInit {
   private totalAmount: string;
   private totalQty: string;
 
+  private paramGroupCode: string;
+  private paramTeamName: string;
+  private paramSdate: string;
+
   constructor(
     public _componentPageTitle: ComponentPageTitle,
     private _route: ActivatedRoute,
     private _dailyDetail: DailyDetailService,
+    private _dialogService: DialogService
   ) { }
 
   private loading = false;
   private displayedColumns = ['DocuDate', 'DocuNo', 'CustPONo', 'JobName', 'CustName',
     'GoodName', 'GoodQty', 'GoodPrice2', 'GoodAmnt', 'EmpName'];
   private dataSource: MatTableDataSource<DetailDailyElement>;
-  // = new MatTableDataSource<DetailDailyElement>(this.TABLE_DETAIL);
+
+  private radioGroup: any[] = [];
+  private selectedRadio: string;
+  private reportType: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  openDialog() {
+    this._dialogService.reporting(this.radioGroup, this.selectedRadio, this.reportType)
+      .subscribe(res => {
+        if (res == undefined) {
+          return false;
+        }
+
+        let param = `?GroupCode=${this.paramGroupCode}`;
+
+        if (res['selectedRadio'] == 'by-customers-order') {
+          param += `&TeamName=${this.paramTeamName}`
+          param += `&SDate=${this.paramSdate}`
+          param += `&ByCustomerOrder=true`;
+
+        } else if (res['selectedRadio'] == 'all-products') {
+          param += `&TeamName=all`;
+          param += `&SDate=${this.paramSdate}`;
+          param += `&ByCustomerOrder=false`;
+
+        } else if (res['selectedRadio'] == 'product') {          
+          param += `&TeamName=${this.paramTeamName}`
+          param += `&SDate=${this.paramSdate}`
+          param += `&ByCustomerOrder=false`;
+
+        }
+
+        param += `&RptType=${res['reportType']}`
+
+        window.open(`${appConfig.reportUrl}${param}`)
+      })
+  }
 
   ngOnInit() {
 
@@ -43,20 +86,51 @@ export class DetailDailyComponent implements OnInit {
         let sDate = new Date(param.date);
         sDate.setDate(param.sDate);
 
-        this._componentPageTitle.title = param.teamName;
+        this.paramGroupCode = param.groupCode;
+        this.paramTeamName = param.teamName;
+        this.paramSdate = sDate.toISOString()
 
-        this._dailyDetail.getDetailDaily(param.groupCode, param.teamName, sDate.toISOString())
+        this._componentPageTitle.title = this.paramTeamName;
+
+        this._dailyDetail.getDetailDaily(this.paramGroupCode, this.paramTeamName, sDate.toISOString())
           .subscribe(res => {
             let array = res.body
             this.totalAmount = array.map(p => p.goodAmnt).reduce((accu, curr) => accu + curr);
             this.totalQty = array.map(p => p.goodQty).reduce((accu, curr) => accu + curr);
             this.drawDataTable(res.body);
           });
+
+        if (this.paramGroupCode == 'screw' || this.paramGroupCode == 'fibre') {
+          this.radioGroup = [
+            {
+              value: "by-customers-order",
+              text: "ยอดสั่งซื้อ " + this.paramTeamName + " ของลูกค้า"
+            },
+            {
+              value: "all-products",
+              text: "ยอดขาย " + this.paramTeamName + " ทั้งหมดต่อวัน"
+            },
+            {
+              value: "product",
+              text: "ยอดขาย " + this.paramTeamName
+            }
+          ]
+        }
+        else {
+          this.radioGroup = [
+            {
+              value: "product",
+              text: "ยอดขาย " + this.paramTeamName
+            }
+          ]
+        }
+
       });
 
   }
 
   ngAfterViewInit() {
+    // this.paginator.pageSize = 5;
     // this.dataSource.paginator = this.paginator;
   }
 

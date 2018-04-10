@@ -9,18 +9,25 @@ import { GroupReportService, GroupUnitService } from '../../../../services';
 })
 export class ReportsDialogComponent implements OnInit {
 
+  selectedRadio: string;
+  reportType: string;
+
   constructor(
     public dialogRef: MatDialogRef<ReportsDialogComponent>,
-    private GroupReportService: GroupReportService,
-    private GroupUnitService: GroupUnitService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
   }
 
-  addEvent(event: MatDatepickerInputEvent<Date>) {
-    this.data.selectedDate = event.value;
+  exportPdf(){
+    this.data.reportType= 'pdf';
+    this.dialogRef.close(this.data);
+  }
+
+  exportExcel(){
+    this.data.reportType = 'excel';
+    this.dialogRef.close(this.data);
   }
 
 }
